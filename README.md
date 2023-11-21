@@ -1,0 +1,2 @@
+# wareWizard
+Inventory management tool
