@@ -1,0 +1,35 @@
+$primary-background: #313855;
+$font-color: #8EBBFF;
+$input-background: rgba(142, 187, 255, 0.26);
+.Login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.Login--card{
+    background-color: $primary-background;
+    padding: 1rem;
+    label{
+        color: $font-color;
+        font-size: 1.75rem;
+    }
+    input{
+        background-color: $input-background;
+        border: none;
+        margin-bottom: 1rem;
+        font-size: 1.1rem;
+        padding: 0.4rem;
+        color: $font-color;
+    }
+    input:focus{
+        outline: $font-color solid 1px;
+    }
+    button{
+        background-color: $font-color;
+        border: none;
+        width: 100%;
+        font-size: 1.5rem;
+    }
+}   
