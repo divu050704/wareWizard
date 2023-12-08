@@ -36,7 +36,7 @@ export default function Daily() {
             dateTotal += total
             return (
                 <div className="daily--table-row">
-                    <div className="daily--table-row-c1 daily--table-row-data">{ele.name} <br />
+                    <div className="daily--table-row-c1 daily--table-row-data">{ele.name} <br /> {ele.phoneNumber || "NA"} <br />
                     <a href={"http://localhost:8080/api/reciept?id="+ele._id} target="next">Generate Bill</a></div>
                     <div className="daily--table-row-c2" >
 
