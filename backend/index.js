@@ -333,8 +333,7 @@ app.get("/api/reciept/", (req, res) => {
             },
             // Your recipient
             "client": {
-                "company": data.name,
-
+                "company": data.name + "<br />" + (data.phoneNumber || " "),
             },
             "information": {
                 // Invoice number
@@ -342,7 +341,7 @@ app.get("/api/reciept/", (req, res) => {
                 // Invoice data
                 "number": req.param("id"),
                 "date": finalDate,
-                "due-date": "paid"
+                "due-date": ""
 
             },
             // The products you would like to see on your invoice
