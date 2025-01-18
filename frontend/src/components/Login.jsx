@@ -6,6 +6,8 @@ export default function Login() {
     const [showPassword, setShowPassword] = useState(false)
     const login = (e) => {
         e.preventDefault()
+        const hashedPassword = sha256(data.passwd)
+        console.log("Hashed Password:", hashedPassword)
         const requestOptions = {
             headers: { "Content-Type": "application/json" },
             method: "POST",
@@ -20,6 +22,7 @@ export default function Login() {
                 }
                 else alert("Wrong username or password")
             })
+            .catch(error => console.error("Error:", error)) 
     }
     return (
         <div className="Login">
