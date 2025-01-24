@@ -1,0 +1,70 @@
+.delete-customer {
+    padding-top: 2rem;
+    width: 80vw;
+}
+.delete-customer--table {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.delete-customer--table-row {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+.delete-customer--table-row-c1 {
+    flex: 0.75;
+    border: 1px solid #8ebbff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.delete-customer--table-row-c2 {
+    flex: 1.25;
+    border: 1px solid #8ebbff;
+    display: flex;
+    flex-direction: column;
+}
+.delete-customer--table-row-c3 {
+    flex: 0.2;
+    border: 1px solid #8ebbff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.delete-customer--table-row-c3 button {
+    background-color: rgba(255, 0, 0, 0.669);
+    color: white;
+    border: none;
+    font-size: 1rem;
+    padding: 0.2rem 0.4rem 0.2rem 0.4rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.delete-customer--table-row-c3 button:hover {
+    background-color: red;
+}
+.delete-customer--table-row-heading {
+    margin: 0;
+    color: #8ebbff;
+    font-size: 1.5rem;
+}
+.delete-customer--table-row-data {
+    margin: 0;
+    font-size: 1.25rem;
+    color: white;
+}
+.delete-customer--table-row-c2-c1 {
+    flex: 1.5;
+    border: 1px solid #8ebbff;
+}
+.delete-customer--table-row-c2-others {
+    flex: 0.75;
+    border: 1px solid #8ebbff;
+}
+.bottom-data {
+    display: flex;
+}
+.bottom-data h3 {
+    color: #8ebbff;
+}

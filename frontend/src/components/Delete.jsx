@@ -1,7 +1,7 @@
 import { useState } from "react"
 import Products from "./Delete/Products" 
 import Customer from "./Delete/Customer"
-import "../styles/Delete.scss"
+import "../styles/Delete.css"
 export default function Delete(){
     const [type,setType] = useState("Product")
     return(

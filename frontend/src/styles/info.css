@@ -1,0 +1,47 @@
+.info {
+    padding-top: 1rem;
+}
+.info--selected-data p {
+    color: #8ebbff;
+    font-size: 1.5rem;
+    margin: 0.5rem 0 0.5rem 0;
+}
+.info--selected-data input {
+    background-color: #8ebbff 42;
+    border: none;
+    padding: 0.25rem;
+    color: #8ebbff;
+}
+.info--selected-data input:focus {
+    outline: 1px solid #8ebbff;
+    box-shadow: 0 0 10px 1px #8ebbff;
+}
+.info--submit {
+    background-color: #8ebbff dc;
+    color: white;
+    padding: 0.25rem 0 0.25rem 0;
+    width: 100%;
+    font-size: 1rem;
+    border: none;
+    transition: all 0.5s;
+}
+.info--submit:hover {
+    cursor: pointer;
+    background-color: #8ebbff;
+}
+@media (max-width: 600px) {
+    .multi-select-custom {
+        width: 100%;
+        padding: none;
+        background-color: #8ebbff 42;
+        width: 110vw;
+   }
+    .info--selected-data {
+        flex-direction: column;
+        align-items: start;
+        width: max-content;
+   }
+    .info--selected-data-info input {
+        width: 5rem;
+   }
+}

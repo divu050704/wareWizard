@@ -1,4 +1,4 @@
-import "../styles/Login.scss"
+import "../styles/Login.css"
 import { useState } from "react"
 import sha256 from "../custom/sha256"
 export default function Login() {

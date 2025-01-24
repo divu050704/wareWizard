@@ -1,0 +1,18 @@
+.complete-data h1 {
+    color: #8ebbff;
+}
+.complete-data table {
+    width: 90%;
+    text-align: center;
+    border-color: #8ebbff;
+    border-collapse: collapse;
+}
+.complete-data table th {
+    color: #8ebbff;
+    font-size: 1.25rem;
+    padding: 0.5rem 0 0.5rem 0;
+}
+.complete-data table td {
+    color: white;
+    padding: 0.5rem 0 0.5rem 0;
+}

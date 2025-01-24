@@ -1,6 +1,6 @@
 import { useState } from "react"
 import sha256 from "../custom/sha256"
-import "../styles/Settings.scss"
+import "../styles/Settings.css"
 
 export default function Settings() {
     const [creds, setCreds] = useState({ currentPassword: '', newPassword: "", confirmNewPassword: "" })

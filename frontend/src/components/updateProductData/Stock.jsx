@@ -1,6 +1,6 @@
 import Multiselect from "multiselect-react-dropdown";
 import { useEffect, useState } from "react";
-import "../../styles/stock.scss"
+import "../../styles/stock.css"
 export default function Stock(){
     const [data, setData] = useState([])
     const [selected, setSelected] = useState([])

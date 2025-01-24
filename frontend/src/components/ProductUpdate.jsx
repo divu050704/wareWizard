@@ -1,5 +1,5 @@
 import { useState } from "react"
-import "../styles/ProductUpdate.scss"
+import "../styles/ProductUpdate.css"
 import Stock from "./updateProductData/stock"
 import Info from "./updateProductData/Info"
 export default function ProductUpdate(){

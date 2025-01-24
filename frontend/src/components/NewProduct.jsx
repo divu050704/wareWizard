@@ -1,5 +1,5 @@
 import { useState } from "react"
-import "../styles/newProducts.scss"
+import "../styles/newProducts.css"
 export default function NewProduct() {
     const [category, setCategory] = useState("Book")
     const [subCategory, setSubCategory] = useState("10-years")

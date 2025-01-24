@@ -1,6 +1,6 @@
 import Multiselect from "multiselect-react-dropdown";
 import { useEffect, useState } from "react";
-import "../../styles/info.scss"
+import "../../styles/info.css"
 
 export default function Info() {
     const [data, setData] = useState([])

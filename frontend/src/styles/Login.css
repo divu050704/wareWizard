@@ -1,0 +1,31 @@
+.Login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.Login--card {
+    background-color: #313855;
+    padding: 1rem;
+}
+.Login--card label {
+    color: #8ebbff;
+    font-size: 1.75rem;
+}
+.Login--card input {
+    background-color: rgba(142, 187, 255, 0.26);
+    border: none;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    padding: 0.4rem;
+    color: #8ebbff;
+}
+.Login--card input:focus {
+    outline: #8ebbff solid 1px;
+}
+.Login--card button {
+    background-color: #8ebbff;
+    border: none;
+    width: 100%;
+    font-size: 1.5rem;
+}

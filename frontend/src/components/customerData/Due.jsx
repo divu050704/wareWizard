@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import "../../styles/Due.scss"
+import "../../styles/Due.css"
 export default function Due() {
     const [data, setData] = useState([])
     useEffect(() => {
