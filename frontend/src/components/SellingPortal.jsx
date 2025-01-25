@@ -17,7 +17,7 @@ export default function SellingPortal() {
         const requestOptions = {
             credentials: "include"
         }
-        fetch("http://localhost:8080/api/products-data", requestOptions)
+        fetch("http://13.61.175.118/api/products-data", requestOptions)
             .then(res => res.json())
             .then(res => setData(res.data))
     }, [])
@@ -134,7 +134,7 @@ export default function SellingPortal() {
             body: JSON.stringify({ data: selected, customerData: customerData }),
             credentials: "include"
         }
-        fetch("http://localhost:8080/api/sell/", requestOptions)
+        fetch("http://13.61.175.118/api/sell/", requestOptions)
             .then(res => res.json())
             .then(res => {
                 if (res.sold) {

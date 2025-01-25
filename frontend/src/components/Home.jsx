@@ -21,7 +21,7 @@ export default function Home() {
     }, [tabOpened])
     const logout = () => {
 
-        fetch("http://localhost:8080/api/logout/", { credentials: "include" })
+        fetch("http://13.61.175.118/api/logout/", { credentials: "include" })
             .then(res => res.json())
             .then(res => {
                 if (res.logout) {
@@ -36,7 +36,7 @@ export default function Home() {
                 <img src={logo} alt="" />
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }} >
                     <h1>wareWizard</h1>
-                    <img src={"http://localhost:8080/api/pps/" + getCookie("uname")} className="user-image" />
+                    <img src={"http://13.61.175.118/api/pps/" + getCookie("uname")} className="user-image" />
                     <div className="hover--option"  >
                         <p>Username: {getCookie("uname")}</p>
                         <p onClick={logout} >Logout</p>

@@ -3,12 +3,12 @@ import "../../styles/Due.css"
 export default function Due() {
     const [data, setData] = useState([])
     useEffect(() => {
-        fetch("http://localhost:8080/api/customer-data")
+        fetch("http://13.61.175.118/api/customer-data")
             .then(res => res.json())
             .then(res => setData(res.data))
     }, [])
     const fetchData = () => {
-        fetch("http://localhost:8080/api/customer-data")
+        fetch("http://13.61.175.118/api/customer-data")
             .then(res => res.json())
             .then(res => setData(res.data))
     }
@@ -19,7 +19,7 @@ export default function Due() {
             body: JSON.stringify({id: id}),
             
         }
-        fetch("http://localhost:8080/api/delete-due/",requestOptions)
+        fetch("http://13.61.175.118/api/delete-due/",requestOptions)
         .then(res => res.json())
         .then(res => {
             if (res.delete){ 

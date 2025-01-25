@@ -13,7 +13,7 @@ export default function NewProduct() {
                 body: JSON.stringify({ data: data, category: category, subCategory: subCategory }),
                 credentials: "include"
             }
-            fetch("http://localhost:8080/api/new-product/", requestOptions)
+            fetch("http://13.61.175.118/api/new-product/", requestOptions)
                 .then(res => res.status === 302 ? alert("Unauthorized Access") : res.json())
                 .then(last => {
                     if (last.saved){

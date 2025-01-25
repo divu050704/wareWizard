@@ -5,7 +5,7 @@ export default function Stock(){
     const [data, setData] = useState([])
     const [selected, setSelected] = useState([])
     useEffect(() => {
-        fetch("http://localhost:8080/api/products-data", {credentials: "include"})
+        fetch("http://13.61.175.118/api/products-data", {credentials: "include"})
         .then(res => res.json())
         .then(res => setData(res.data))
     },[])
@@ -56,7 +56,7 @@ export default function Stock(){
             body: JSON.stringify({ data: selected }),
             credentials: "include"
         }
-        fetch("http://localhost:8080/api/update-stock/", requestOptions)
+        fetch("http://13.61.175.118/api/update-stock/", requestOptions)
             .then(res => res.json())
             .then(res => {
                 if (res.Updated){

@@ -3,7 +3,7 @@ import "../../styles/Advance.css"
 export default function Advance() {
     const [data, setData] = useState([])
     useEffect(() => {
-        fetch("http://localhost:8080/api/customer-data")
+        fetch("http://13.61.175.118/api/customer-data")
             .then(res => res.json())
             .then(res => setData(res.data))
     }, [])
@@ -14,7 +14,7 @@ export default function Advance() {
             body: JSON.stringify({id: id}),
             
         }
-        fetch("http://localhost:8080/api/delete-advance/",requestOptions)
+        fetch("http://13.61.175.118/api/delete-advance/",requestOptions)
         .then(res => res.json())
         .then(res => {
             if (res.delete){ 

@@ -3,7 +3,7 @@ import "../../styles/Complete.css"
 export default function Complete() {
     const [data, setData] = useState([])
     useEffect(() => {
-        fetch("http://localhost:8080/api/products-data/", { credentials: "include" })
+        fetch("http://13.61.175.118/api/products-data/", { credentials: "include" })
             .then(res => res.json())
             .then(res => setData(res.data))
     }, [])

@@ -8,7 +8,7 @@ import Home from './components/Home'
 function App() {
   const [verified, setVerified] = useState(false)
   useEffect(() => {
-    fetch("http://localhost:8080/api/verify",{credentials: "include"})
+    fetch("http://13.61.175.118/api/verify",{credentials: "include"})
       .then(res => res.json())
       .then(last => last.Verified ? setVerified(true) : setVerified(false))
       

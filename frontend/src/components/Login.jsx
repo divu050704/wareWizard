@@ -12,7 +12,7 @@ export default function Login() {
             body: JSON.stringify({ ...data, passwd: sha256(data.passwd) }),
             credentials: "include"
         }
-        fetch("http://localhost:8080/api/login/", requestOptions)
+        fetch("http://13.61.175.118/api/login/", requestOptions)
             .then(res => res.json())
             .then(last => {
                 if (last.loggedIn) {
