@@ -1,12 +1,13 @@
 import Multiselect from "multiselect-react-dropdown";
 import { useEffect, useState } from "react";
 import "../../styles/info.css"
+import backendInfo from "../../custom/backend-info.json"
 
 export default function Info() {
     const [data, setData] = useState([])
     const [selected, setSelected] = useState([])
     useEffect(() => {
-        fetch("http://13.61.175.118/api/products-data", { credentials: "include" })
+        fetch(`${backendInfo.url}/api/products-data`, { credentials: "include" })
             .then(res => res.json())
             .then(res => setData(res.data))
     }, [])
@@ -73,7 +74,7 @@ export default function Info() {
             body: JSON.stringify({ data: selected }),
             credentials: "include"
         }
-        fetch("http://13.61.175.118/api/update-info/", requestOptions)
+        fetch(`${backendInfo.url}/api/update-info/`, requestOptions)
             .then(res => res.json())
             .then(res => {
                 if (res.Updated){

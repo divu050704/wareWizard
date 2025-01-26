@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react"
 import "../../styles/Due.css"
+import backendInfo from "../../custom/backend-info.json"
 export default function Due() {
     const [data, setData] = useState([])
     useEffect(() => {
-        fetch("http://13.61.175.118/api/customer-data")
+        fetch(`${backendInfo.url}/api/customer-data`)
             .then(res => res.json())
             .then(res => setData(res.data))
     }, [])
     const fetchData = () => {
-        fetch("http://13.61.175.118/api/customer-data")
+        fetch(`${backendInfo.url}/api/customer-data`)
             .then(res => res.json())
             .then(res => setData(res.data))
     }
@@ -19,7 +20,7 @@ export default function Due() {
             body: JSON.stringify({id: id}),
             
         }
-        fetch("http://13.61.175.118/api/delete-due/",requestOptions)
+        fetch(`${backendInfo.url}/api/delete-due/`,requestOptions)
         .then(res => res.json())
         .then(res => {
             if (res.delete){ 

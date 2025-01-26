@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import "../../styles/daily.css"
+import backendInfo from "../../custom/backend-info.json"
+
 export default function Daily() {
     const [data, setData] = useState([])
     const [date, setDate] = useState("")
     useEffect(() => {
-        fetch("http://13.61.175.118/api/customer-data", { credentials: "include" })
+        fetch(`${backendInfo.url}/api/customer-data`, { credentials: "include" })
             .then(res => res.json())
             .then(res => setData(res.data))
         let dateToday = new Date()
@@ -37,7 +39,7 @@ export default function Daily() {
             return (
                 <div className="daily--table-row">
                     <div className="daily--table-row-c1 daily--table-row-data">{ele.name} <br /> {ele.phoneNumber || "NA"} <br />
-                    <a href={"http://13.61.175.118/api/reciept?id="+ele._id} target="next">Generate Bill</a></div>
+                    <a href={`${backendInfo.url}/api/reciept?id=${ele._id}`} target="next">Generate Bill</a></div>
                     <div className="daily--table-row-c2" >
 
                         <div style={{ display: "flex" }} >

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import Multiselect from 'multiselect-react-dropdown';
 import "../styles/SellingPortal.css"
+import backendInfo from "../custom/backend-info.json"
 
 export default function SellingPortal() {
 
@@ -17,7 +18,7 @@ export default function SellingPortal() {
         const requestOptions = {
             credentials: "include"
         }
-        fetch("http://13.61.175.118/api/products-data", requestOptions)
+        fetch(`${backendInfo.url}/api/products-data`, requestOptions)
             .then(res => res.json())
             .then(res => setData(res.data))
     }, [])
@@ -134,7 +135,7 @@ export default function SellingPortal() {
             body: JSON.stringify({ data: selected, customerData: customerData }),
             credentials: "include"
         }
-        fetch("http://13.61.175.118/api/sell/", requestOptions)
+        fetch(`${backendInfo.url}/api/sell/`, requestOptions)
             .then(res => res.json())
             .then(res => {
                 if (res.sold) {

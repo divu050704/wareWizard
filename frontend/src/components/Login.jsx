@@ -1,6 +1,9 @@
 import "../styles/Login.css"
 import { useState } from "react"
 import sha256 from "../custom/sha256"
+import backendInfo from "../custom/backend-info.json"
+
+
 export default function Login() {
     const [data, setData] = useState({ uname: "", passwd: "" })
     const [showPassword, setShowPassword] = useState(false)
@@ -12,7 +15,7 @@ export default function Login() {
             body: JSON.stringify({ ...data, passwd: sha256(data.passwd) }),
             credentials: "include"
         }
-        fetch("http://13.61.175.118/api/login/", requestOptions)
+        fetch(`${backendInfo.url}/api/login/`, requestOptions)
             .then(res => res.json())
             .then(last => {
                 if (last.loggedIn) {

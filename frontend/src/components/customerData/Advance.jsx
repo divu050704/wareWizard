@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react"
 import "../../styles/Advance.css"
+import backendInfo from "../../custom/backend-info.json"
+
 export default function Advance() {
     const [data, setData] = useState([])
     useEffect(() => {
-        fetch("http://13.61.175.118/api/customer-data")
+        fetch(`${backendInfo.url}/api/customer-data`)
             .then(res => res.json())
             .then(res => setData(res.data))
     }, [])
@@ -14,7 +16,7 @@ export default function Advance() {
             body: JSON.stringify({id: id}),
             
         }
-        fetch("http://13.61.175.118/api/delete-advance/",requestOptions)
+        fetch(`${backendInfo.url}/api/delete-advance/`,requestOptions)
         .then(res => res.json())
         .then(res => {
             if (res.delete){ 

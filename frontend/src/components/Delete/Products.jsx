@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react"
 import "../../styles/deleteProducts.css"
+import backendInfo from "../../custom/backend-info.json"
+
 export default function Products() {
     const [data, setData] = useState([])
     useEffect(() => {
-        fetch("http://13.61.175.118/api/products-data/", { credentials: "include" })
+        fetch(`${backendInfo.url}/api/products-data/`, { credentials: "include" })
             .then(res => res.json())
             .then(res => setData(res.data))
     }, [])
@@ -15,7 +17,7 @@ export default function Products() {
                 body: JSON.stringify({ id: id, item: name }),
                 credentials: "include"
             }
-            fetch("http://13.61.175.118/api/delete-product/", requestOptions)
+            fetch(`${backendInfo.url}/api/delete-product/`, requestOptions)
                 .then(res => res.json())
                 .then(res => {
                     if (res.Deleted) {

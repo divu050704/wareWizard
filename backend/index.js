@@ -22,7 +22,7 @@ app.use(
   cors({
     optionsSuccessStatus: 200,
     credentials: true,
-    origin: "http://localhost:5173",
+    origin: process.env["ALLOWED_HOST"],
   })
 );
 app.use(express.static("public"));
@@ -631,6 +631,6 @@ app.post("/api/new-user/", (req, res) => {
 });
 
 // listen for requests :)
-var listener = app.listen(8080, function () {
+var listener = app.listen(3001, function () {
   console.log("Your app is listening on port " + listener.address().port);
 });

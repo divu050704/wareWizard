@@ -13,6 +13,8 @@ import Settings from "./Settings"
 import getCookie from "../custom/getCookie"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from "@fortawesome/free-solid-svg-icons"
+import backendInfo from "../custom/backend-info.json"
+
 export default function Home() {
     const [tabOpened, setTabOpened] = useState(localStorage.getItem("tab") || "newProduct")
     const [sidebarOpen, setSideBarOpen] = useState(true)
@@ -21,7 +23,7 @@ export default function Home() {
     }, [tabOpened])
     const logout = () => {
 
-        fetch("http://13.61.175.118/api/logout/", { credentials: "include" })
+        fetch(`${backendInfo.url}/api/logout/`, { credentials: "include" })
             .then(res => res.json())
             .then(res => {
                 if (res.logout) {
@@ -36,7 +38,7 @@ export default function Home() {
                 <img src={logo} alt="" />
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }} >
                     <h1>wareWizard</h1>
-                    <img src={"http://13.61.175.118/api/pps/" + getCookie("uname")} className="user-image" />
+                    <img src={`${backendInfo}/api/pps/` + getCookie("uname")} className="user-image" />
                     <div className="hover--option"  >
                         <p>Username: {getCookie("uname")}</p>
                         <p onClick={logout} >Logout</p>

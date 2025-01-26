@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react"
 import "../../styles/deleteCustomer.css"
+import backendInfo from "../../custom/backend-info.json"
+
 export default function Customer() {
     const [data, setData] = useState([])
     useEffect(() => {
-        fetch("http://13.61.175.118/api/customer-data", { credentials: "include" })
+        fetch(`${backendInfo.url}/api/customer-data`, { credentials: "include" })
             .then(res => res.json())
             .then(res => setData(res.data))
         
@@ -16,7 +18,7 @@ export default function Customer() {
                 body: JSON.stringify({ id: id, item: name }),
                 credentials: "include"
             }
-            fetch("http://13.61.175.118/api/delete-customer/", requestOptions)
+            fetch(`${backendInfo.url}/api/delete-customer/`, requestOptions)
                 .then(res => res.json())
                 .then(res => {
                     if (res.Deleted) {

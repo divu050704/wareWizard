@@ -1,6 +1,7 @@
 import { useState } from "react"
 import sha256 from "../custom/sha256"
 import "../styles/Settings.css"
+import backendInfo from "../custom/backend-info.json"
 
 export default function Settings() {
     const [creds, setCreds] = useState({ currentPassword: '', newPassword: "", confirmNewPassword: "" })
@@ -14,12 +15,12 @@ export default function Settings() {
                 body: JSON.stringify({ passwd: sha256(creds.currentPassword), newPasswd: sha256(creds.newPassword) }),
                 credentials: "include"
             }
-            fetch("http://13.61.175.118/api/change-password", requestOptions)
+            fetch(`${backendInfo.url}/api/change-password`, requestOptions)
                 .then(res => res.json())
                 .then(res => {
                     if (res.Updated) {
                         alert("Password Changed, you will be logged out now!")
-                        fetch("http://13.61.175.118/api/logout/", { credentials: "include" })
+                        fetch(`${backendInfo.url}/api/logout/`, { credentials: "include" })
                         window.location.reload()
                     }
                     else {
@@ -41,7 +42,7 @@ export default function Settings() {
                 body: JSON.stringify({ passwd: sha256(newUser.passwd.trim()), user: newUser.user.trim(), admin: newUser.admin }),
                 credentials: "include"
             }
-            fetch("http://13.61.175.118/api/new-user", requestOptions)
+            fetch(`${backendInfo.url}/api/new-user`, requestOptions)
                 .then(res => res.json())
                 .then(res => {
                     if (res.added) {

@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react"
 import "../../styles/Complete.css"
+import backendInfo from "../../custom/backend-info.json"
+
 export default function Complete() {
     const [data, setData] = useState([])
     useEffect(() => {
-        fetch("http://13.61.175.118/api/products-data/", { credentials: "include" })
+        fetch(`${backendInfo.url}/api/products-data/`, { credentials: "include" })
             .then(res => res.json())
             .then(res => setData(res.data))
     }, [])
