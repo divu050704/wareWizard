@@ -80,14 +80,28 @@ export default function NewProduct() {
             <h2>Category</h2>
             <select value={category} onChange={(event) => setCategory(event.target.value)}>
                 <option value="Book">Book</option>
+                <option value="Notebook">Notebook</option>
+                <option value="Sheets">Sheets</option>
+                <option value="Files">Files</option>
                 <option value="others">Others</option>
             </select>
-            {category === "Book" &&
+            {category === "Book" && 
                 <div>
                     <h2>Sub-Category</h2>
                     <select value={subCategory} onChange={(event) => setSubCategory(event.target.value)}>
                         <option value="10-years">10-years</option>
                         <option value="Guide">Guide</option>
+                        <option value="Novels">Novels</option>
+                    </select>
+                </div>
+            }
+            {category === "Notebook" &&
+                <div>
+                    <h2>Sub-Category</h2>
+                    <select value={subCategory} onChange={(event) => setSubCategory(event.target.value)}>
+                        <option value="Practical">Practical</option>
+                        <option value="Spiral">Spiral</option>
+                        <option value="others">Others</option>
                     </select>
                 </div>
             }

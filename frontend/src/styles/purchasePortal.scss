@@ -1,0 +1,111 @@
+$primary-background: #313855;
+$font-color: #8EBBFF;
+$input-background: rgba(142, 187, 255, 0.26);
+
+.purchase-portal {
+  padding: 0 0 1rem 1rem;
+    position: absolute;
+    left: 15%;
+    overflow-y: scroll;
+    width: 83.75%;
+    height: 85%;
+    overflow-x: scroll;
+
+  h1, h2, h3, th {
+        color: $font-color;
+        
+    }
+
+    td{
+      color: white;
+    }
+
+  left: 15vw;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    input,button {
+      background-color: $input-background;
+      border: none;
+      padding: 0.25rem;
+      color: $font-color;
+      width: 50%;
+      border-radius: 0.2rem;
+      font-size: 1.25rem;
+
+      
+
+      &:focus {
+        outline: 1px solid $font-color;
+        box-shadow: 0 0 10px 1px $font-color;
+      }
+    }
+
+    select {
+      background-color: $input-background;
+      border: none;
+      padding: 0.25rem;
+      color: $font-color;
+      width: 50%;
+      border-radius: 0.2rem;
+      font-size: 1.25rem;
+  }
+
+    button {
+      background-color: $font-color !important;
+    color: white !important;
+    width: 50.5% !important;
+
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+  }
+
+  table {
+    width: 70%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+
+    thead {
+      tr {
+        background-color: rgba(142, 187, 255, 0.3);
+
+        th {
+          padding: 0.5rem;
+          text-align: left;
+          width: 20%;
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        &:nth-child(even) {
+          background-color: rgba(142, 187, 255, 0.1);
+        }
+
+        td {
+          padding: 0.5rem;
+        }
+
+        &:hover {
+          background-color: rgba(142, 187, 255, 0.2);
+        }
+      }
+    }
+  }
+
+  .responsive-container {
+    overflow-x: auto;
+
+    @media (max-width: 600px) {
+      table {
+        font-size: 0.8rem;
+      }
+    }
+  }
+}

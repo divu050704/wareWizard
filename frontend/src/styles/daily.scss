@@ -1,99 +1,75 @@
 $primary-background: #313855;
 $font-color: #8EBBFF;
 $input-background: #8ebbff42;
-.Daily{
-    width: 80vw;
-}
-.daily--input{
-    background-color: $input-background;
-    color: $font-color;
-    border: none;
-    font-size: 1.1rem;
-    padding: 0.5rem;
-    margin-bottom: 1rem;
-}
-::-webkit-calendar-picker-indicator {
-    filter: invert(1);
-}
-.daily--table{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-}
-.daily--table-row{
-    display: flex;
-    justify-content: space-around;
-    text-align: center;
-}
-.daily--table-row-c1{
 
-    flex: 0.75;
-    border: 1px solid $font-color;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    a{
-        text-decoration: none;
-        background-color: $font-color;
-        font-size: 1rem;
-        padding: 0.25rem;
-        color: white;
-        margin-top: 0.5rem;
-    
-    }
+.due--table {
+    width: 80vw;
+    display: grid;
 }
-.daily--table-row-c2{
-    flex:1.25;
-    border: 1px solid $font-color;
+
+.due--table-row {
     display: flex;
-   
-    flex-direction: column;
-}
-.daily--table-row-heading{
+    width: 100%;
     margin: 0;
+    padding: 0;
+}
+
+.due--table-heading {
+    flex: 1;
+    font-weight: bold;
     color: $font-color;
     font-size: 1.5rem;
-}
-.daily--table-row-data{
+    border: 1px solid $font-color;
+    text-align: center;
     margin: 0;
-    font-size: 1.25rem;
-    color: white;
-}
-.daily--table-row-c2-c1{
-    flex: 1.5;
-    border:  1px solid $font-color;
-    
-}
-.daily--table-row-c2-others{
-    flex: 0.75;
-    border:  1px solid $font-color;
-    
-}
-.bottom-data{
-    display: flex;
-    h3{
-        color: $font-color  ;
-    }
 }
 
-@media (max-width: 600px){
-    .daily--input{
-        font-size: 1rem;
-        padding: 0.25rem;
-    }
-    .daily--table{
-        width: 100vw;
-    }
-    .daily--table-row-heading{
+.due--table-data-products {
+    flex: 1;
+    margin: 0;
+    color: white;
+    font-size: 1rem;
+    border: 1px solid $font-color;
+    text-align: center;
+}
+
+.due--table-data {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    margin: 0;
+    color: white;
+    font-size: 1rem;
+    border: 1px solid $font-color;
+    text-align: center;
+}
+
+.due--table-delete {
+    background-color: rgba(255, 0, 0, 0.735);
+    border: none;
+    color: white;
+    font-size: 1rem;
+    padding: 0.25rem 0.5rem;
+}
+
+.due--table-delete:focus {
+    outline: orange;
+}
+
+.due--table-delete:hover {
+    background-color: red;
+    cursor: pointer;
+}
+
+@media (max-width: 600px) {
+    .due--table-heading {
         font-size: 1.25rem;
+        padding: 0 1rem;
     }
-    .bottom-data{
-        h3{
-            font-size: 1rem;
-        }
-    }
-    .daily--table-row-data{
+
+    .due--table-data {
         font-size: 1rem;
+        padding: 0 1rem;
     }
 }

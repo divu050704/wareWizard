@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 
 import NewProduct from "./NewProduct"
 import SellingPortal from "./SellingPortal"
+import PurchasePortal from "./PurchasePortal"
 import CustomerData from "./CustomerData"
 import ProductsData from "./ProductsData"
 import ProductUpdate from "./productUpdate"
@@ -60,6 +61,11 @@ export default function Home() {
                                 Selling Portal
                             </p>
                             <p
+                                className={tabOpened === "purchasePortal" ? "sidebar--selected" : "sidebar--unselected"}
+                                onClick={() => setTabOpened("purchasePortal")}>
+                                Purchase Portal
+                            </p>
+                            <p
                                 className={tabOpened === "customerData" ? "sidebar--selected" : "sidebar--unselected"}
                                 onClick={() => setTabOpened("customerData")}>
                                 Customer Data
@@ -79,9 +85,6 @@ export default function Home() {
                                 onClick={() => setTabOpened("Delete")}>
                                 Delete Data
                             </p>
-                            <a href="https://inventory-new-backup.divu050704.repl.co/"
-                                target="next"
-                                style={{textDecoration: "none", color: "#8EBBFF", margin: "0.5rem"}}>Renting Portal</a>
                         </div>
                         }
                     </AnimatePresence>
@@ -89,6 +92,7 @@ export default function Home() {
 
                 {tabOpened === "newProduct" && <NewProduct />}
                 {tabOpened === "sellingPortal" && <SellingPortal />}
+                {tabOpened === "purchasePortal" && <PurchasePortal />}
                 {tabOpened === "customerData" && <CustomerData />}
                 {tabOpened === "productsData" && <ProductsData />}
                 {tabOpened === "productUpdate" && <ProductUpdate />}

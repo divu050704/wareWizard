@@ -124,6 +124,22 @@ const customerSchema = mongoose.Schema({
 
 }, { timestamps: true })
 
+
+const vendorSchema = new mongoose.Schema({
+    name: String,
+    address: String,
+    phone: String,
+  });
+  
+  const purchaseSchema = new mongoose.Schema({
+    invoice: String,
+    date: Date,
+    vendor: { type: mongoose.Schema.Types.ObjectId, ref: 'Vendor' },
+    amount: Number,
+  });
+  
+  const Vendor = mongoose.model('Vendor', vendorSchema);
+  const Purchase = mongoose.model('Purchase', purchaseSchema);
 const userModel = mongoose.model("users", userSchema)
 const dataModel = mongoose.model("data", dataSchema)
 const customerModel = mongoose.model("customer", customerSchema)
@@ -288,6 +304,29 @@ app.post("/api/sell/", (req, res) => {
 })
 
 
+
+const deletePurchase = async (purchaseId) => {
+  console.log('Deleting purchase with ID:', purchaseId); // Debugging log
+  try {
+    const response = await axios.delete(`http://localhost:8080/purchases/${purchaseId}`);
+    console.log('Delete response:', response); // Log the backend response
+
+    if (response.status === 200) {
+      setPurchases((prev) => prev.filter((purchase) => purchase._id !== purchaseId));
+      alert('Purchase deleted successfully');
+    } else {
+      console.error('Unexpected response status:', response.status); // Log unexpected responses
+      alert('Failed to delete purchase. Please try again.');
+    }
+  } catch (error) {
+    console.error('Error deleting purchase:', error.response || error); // Enhanced error logging
+    alert('Failed to delete purchase. Please try again.');
+  }
+};
+
+
+
+
 app.get("/api/reciept/", (req, res) => {
     async function createReciept(data,id) {
         const result = await easyinvoice.createInvoice(data);
@@ -363,6 +402,7 @@ app.get("/api/reciept/", (req, res) => {
     
 })
 
+
 app.get("/api/customer-data/", (req, res) => {
 
     async function fetchData() {
@@ -371,6 +411,8 @@ app.get("/api/customer-data/", (req, res) => {
     }
     fetchData()
 })
+
+
 
 app.post("/api/delete-due", (req, res) => {
     async function deleteDue(id) {
@@ -511,6 +553,7 @@ app.post("/api/delete-customer", (req, res) => {
     checkAndReturn()
 })
 
+
 app.get("/api/pps/:name", (req, res) => {
 
     res.sendFile("./pps/" + req.params.name + ".jpeg", { root: __dirname })
@@ -566,6 +609,56 @@ app.post("/api/new-user/", (req, res) => {
     }
     checkAndReturn()
 })
+
+app.get('/vendors', async (req, res) => {
+    try {
+      const vendors = await Vendor.find();
+      res.json(vendors);
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to fetch vendors' });
+    }
+  });
+  
+  // POST /vendors: Add a new vendor
+  app.post('/vendors', async (req, res) => {
+    const { name, address, phone } = req.body;
+    try {
+      const newVendor = new Vendor({ name, address, phone });
+      await newVendor.save();
+      res.status(201).json(newVendor);
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to add vendor' });
+    }
+  });
+  
+  // Purchases API
+  
+  // GET /purchases: Fetch all purchases
+  app.get('/purchases', async (req, res) => {
+    try {
+      const purchases = await Purchase.find().populate('vendor');
+      res.json(purchases);
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to fetch purchases' });
+    }
+  });
+  
+  // POST /purchases: Add a new purchase
+  app.post('/purchases', async (req, res) => {
+    const { invoice, date, vendorId, amount } = req.body;
+    try {
+      const vendor = await Vendor.findById(vendorId); // Fetch the vendor by ID
+      if (!vendor) {
+        return res.status(404).json({ error: 'Vendor not found' });
+      }
+  
+      const newPurchase = new Purchase({ invoice, date, vendor: vendor._id, amount });
+      await newPurchase.save();
+      res.status(201).json(newPurchase);
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to add purchase' });
+    }
+  });
 
 // listen for requests :) 
 var listener = app.listen(8080, function () {
