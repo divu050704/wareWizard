@@ -63,6 +63,14 @@ const dataSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  seller: {
+    type: String,
+    required: true
+  },
+  GST:{
+    type: Number,
+    required: true
+  }
 });
 
 const userSchema = mongoose.Schema(
@@ -132,9 +140,22 @@ const customerSchema = mongoose.Schema(
   { timestamps: true }
 );
 
+const sellerSchema = mongoose.Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  phoneNumber: {
+    type: String,
+    required: true
+  }
+})
+
 const userModel = mongoose.model("users", userSchema);
 const dataModel = mongoose.model("data", dataSchema);
 const customerModel = mongoose.model("customer", customerSchema);
+const sellerModel = mongoose.model("seller", sellerSchema)
+
 app.post("/api/login", (req, res) => {
   async function setSID(id) {
     await userModel
