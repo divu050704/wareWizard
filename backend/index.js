@@ -170,11 +170,11 @@ app.post("/api/login", (req, res) => {
         setSID(id);
         res.cookie("SID", id, {
           maxAge: 1000 * 60 * 60 * 24 * 30,
-          secure: process.env.NODE_ENV === "development" ? false : true,
+          secure:false,
         });
         res.cookie("uname", req.body.uname, {
           maxAge: 1000 * 60 * 60 * 24 * 30,
-          secure: process.env.NODE_ENV === "development" ? false : true,
+          secure:false,
         });
         res.status(200).send({
           loggedIn: true,
