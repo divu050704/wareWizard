@@ -1,0 +1,22 @@
+.new-distributor {
+    padding: 0 0 0 1rem;
+    position: absolute;
+    left: 15%;
+    overflow-y: scroll;
+    width: 83.75%;
+    height: 85%;
+    color: #8ebbff;
+}
+.new-distributor h2 {
+    color: #8ebbff;
+}
+.submit--button {
+    background-color: #8ebbff;
+    border: none;
+    color: white;
+    width: 90%;
+    font-size: 1.5rem;
+    padding: 0.5rem 0 0.5rem 0;
+    margin-bottom: 0.5rem;
+    margin-top: 2rem;
+}

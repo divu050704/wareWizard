@@ -10,6 +10,7 @@ import ProductsData from "./ProductsData"
 import ProductUpdate from "./productUpdate"
 import Delete from "./Delete"
 import Settings from "./Settings"
+import NewDistributor from "./NewDistributor"
 import getCookie from "../custom/getCookie"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from "@fortawesome/free-solid-svg-icons"
@@ -81,6 +82,11 @@ export default function Home() {
                                 onClick={() => setTabOpened("Delete")}>
                                 Delete Data
                             </p>
+                            <p
+                                className={tabOpened === "newDistributor" ? "sidebar--selected" : "sidebar--unselected"}
+                                onClick={() => setTabOpened("newDistributor")}>
+                                New Distributor
+                            </p>
                             <a href="https://inventory-new-backup.divu050704.repl.co/"
                                 target="next"
                                 style={{textDecoration: "none", color: "#8EBBFF", margin: "0.5rem"}}>Renting Portal</a>
@@ -96,6 +102,7 @@ export default function Home() {
                 {tabOpened === "productUpdate" && <ProductUpdate />}
                 {tabOpened === "Delete" && <Delete />}
                 {tabOpened === "settings" && <Settings />}
+                {tabOpened === "newDistributor" && <NewDistributor />}
             </div>
         </>
     )

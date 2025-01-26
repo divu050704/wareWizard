@@ -65,12 +65,12 @@ const dataSchema = mongoose.Schema({
   },
   seller: {
     type: String,
-    required: true
+    required: true,
   },
-  GST:{
+  gst: {
     type: Number,
-    required: true
-  }
+    required: true,
+  },
 });
 
 const userSchema = mongoose.Schema(
@@ -143,18 +143,18 @@ const customerSchema = mongoose.Schema(
 const sellerSchema = mongoose.Schema({
   name: {
     type: String,
-    required: true
+    required: true,
   },
   phoneNumber: {
     type: String,
-    required: true
-  }
-})
+    required: true,
+  },
+});
 
 const userModel = mongoose.model("users", userSchema);
 const dataModel = mongoose.model("data", dataSchema);
 const customerModel = mongoose.model("customer", customerSchema);
-const sellerModel = mongoose.model("seller", sellerSchema)
+const sellerModel = mongoose.model("seller", sellerSchema);
 
 app.post("/api/login", (req, res) => {
   async function setSID(id) {
@@ -191,11 +191,11 @@ app.post("/api/login", (req, res) => {
         setSID(id);
         res.cookie("SID", id, {
           maxAge: 1000 * 60 * 60 * 24 * 30,
-          secure:false,
+          secure: false,
         });
         res.cookie("uname", req.body.uname, {
           maxAge: 1000 * 60 * 60 * 24 * 30,
-          secure:false,
+          secure: false,
         });
         res.status(200).send({
           loggedIn: true,
@@ -231,7 +231,6 @@ app.get("/api/verify", (req, res) => {
 
 app.post("/api/new-product", (req, res) => {
   const data = req.body.data;
-
   async function check() {
     const query = await userModel
       .findOne({
@@ -259,6 +258,8 @@ app.post("/api/new-product", (req, res) => {
         quantity: ele.quantity,
         category: req.body.category,
         subCategory: req.body.subCategory,
+        gst: ele.gst,
+        seller: ele.seller,
       };
       const save = dataModel(eachData);
       save.save();
@@ -649,6 +650,55 @@ app.post("/api/new-user/", (req, res) => {
     }
   }
   checkAndReturn();
+});
+
+app.post("/api/new-distributor/", (req, res) => {
+  async function checkAndReturn() {
+    const verify = await userModel
+      .findOne({
+        uname: req.cookies.uname,
+        SID: req.cookies.SID,
+        admin: true,
+      })
+      .exec();
+    if (verify !== null) {
+      const name = req.body.name;
+      const phoneNumber = req.body.phoneNumber;
+      const distributorExistence = await sellerModel
+        .findOne({ phoneNumber: phoneNumber })
+        .exec();
+      if (distributorExistence === null) {
+        const data = new sellerModel({
+          name: name,
+          phoneNumber: phoneNumber,
+        });
+        data.save();
+        res.status(200).send({ added: true });
+      } else {
+        res.status(201).send({ unsaved: phoneNumber });
+      }
+    } else {
+      res.status(302).send({ status: "Unauthorized Access" });
+    }
+  }
+  checkAndReturn();
+});
+
+app.get("/api/get-distributors/", async (req, res) => {
+  const verify = await userModel
+    .findOne({
+      uname: req.cookies.uname,
+      SID: req.cookies.SID,
+      admin: true,
+    })
+    .exec();
+  if (verify !== null){
+    const data = await sellerModel.find({})
+    res.status(200).send({data: data})
+  }
+  else{
+    res.status(302).send({ status: "Unauthorized Access" });
+  }
 });
 
 // listen for requests :)
