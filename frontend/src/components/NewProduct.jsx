@@ -5,7 +5,7 @@ import backendInfo from "../custom/backend-info.json"
 export default function NewProduct() {
     const [category, setCategory] = useState("Book")
     const [subCategory, setSubCategory] = useState("10-years")
-    const [data, setData] = useState([{ productName: "", costPrice: "", sellingPrice: "", quantity: "" }])
+    const [data, setData] = useState([{ productName: "", costPrice: "", sellingPrice: "", quantity: "", seller: ""}])
 
     const submit = () => {
         if (data.every(x => x.productName !== "" && x.costPrice !== "" && x.sellingPrice !== "" && x.quantity !== "")) {
@@ -15,7 +15,7 @@ export default function NewProduct() {
                 body: JSON.stringify({ data: data, category: category, subCategory: subCategory }),
                 credentials: "include"
             }
-            fetch(`${backendInfo}/api/new-product/`, requestOptions)
+            fetch(`${backendInfo.url}/api/new-product/`, requestOptions)
                 .then(res => res.status === 302 ? alert("Unauthorized Access") : res.json())
                 .then(last => {
                     if (last.saved){
@@ -33,7 +33,7 @@ export default function NewProduct() {
 
     }
     const addNew = () => {
-        setData(prev => [...prev, { productName: "", costPrice: "", sellingPrice: "", quantity: "" }])
+        setData(prev => [...prev, { productName: "", costPrice: "", sellingPrice: "", quantity: "", gst: "" }])
     }
     const delData = (index) => {
         setData((prev) => {
@@ -70,6 +70,10 @@ export default function NewProduct() {
                 <input value={ele.sellingPrice} onChange={(event) => handleDataChange(event.target.value, "sellingPrice", index)} />
                 <h2>Quantity</h2>
                 <input value={ele.quantity} onChange={(event) => handleDataChange(event.target.value, "quantity", index)} /><br />
+                <h2>Seller</h2>
+                <input value={ele.seller} onChange={(event) => handleDataChange(event.target.value, "seller", index)} /><br />
+                <h2>GST</h2>
+                <input value={ele.gst} onChange={(event) => handleDataChange(event.target.value, "gst", index)} type="number" /><br />
                 <br />
                 <button onClick={() => delData(index)} className="delete">Delete</button>
                 <hr />

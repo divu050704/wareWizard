@@ -38,7 +38,7 @@ export default function Home() {
                 <img src={logo} alt="" />
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }} >
                     <h1>wareWizard</h1>
-                    <img src={`${backendInfo}/api/pps/` + getCookie("uname")} className="user-image" />
+                    <img src={`${backendInfo.url}/api/pps/` + getCookie("uname")} className="user-image" />
                     <div className="hover--option"  >
                         <p>Username: {getCookie("uname")}</p>
                         <p onClick={logout} >Logout</p>

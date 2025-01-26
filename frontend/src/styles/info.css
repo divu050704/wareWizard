@@ -7,7 +7,7 @@
     margin: 0.5rem 0 0.5rem 0;
 }
 .info--selected-data input {
-    background-color: #8ebbff 42;
+    background-color: #8ebbff76;
     border: none;
     padding: 0.25rem;
     color: #8ebbff;
@@ -17,7 +17,7 @@
     box-shadow: 0 0 10px 1px #8ebbff;
 }
 .info--submit {
-    background-color: #8ebbff dc;
+    background-color: #8ebbff76;
     color: white;
     padding: 0.25rem 0 0.25rem 0;
     width: 100%;
@@ -33,7 +33,7 @@
     .multi-select-custom {
         width: 100%;
         padding: none;
-        background-color: #8ebbff 42;
+        background-color: #8ebbff76;
         width: 110vw;
    }
     .info--selected-data {

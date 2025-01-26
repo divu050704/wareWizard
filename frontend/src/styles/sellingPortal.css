@@ -12,7 +12,7 @@
     color: #8ebbff;
 }
 .selling-portal input {
-    background-color: #8ebbff 42;
+    background-color: #8ebbff61;
     border: none;
     padding: 0.25rem;
     color: #8ebbff;
@@ -36,7 +36,7 @@
     width: fit-content;
 }
 .selling-portal select {
-    background-color: #8ebbff 42;
+    background-color: #8ebbff71;
     border: none;
     padding: 0.25rem;
     color: #8ebbff;
@@ -67,11 +67,19 @@
     justify-content: space-around;
 }
 .selling-portal--selected-data-info input {
-    background-color: #8ebbff 42;
+    background-color: #8ebbff76;
     border: none;
     padding: 0.25rem;
     color: #8ebbff;
 }
+
+input{
+    background-color: #8ebbff76;
+    border: none;
+    padding: 0.25rem;
+    color: #8ebbff;
+}
+
 .selling-portal--selected-data-info input:focus {
     outline: 1px solid #8ebbff;
     box-shadow: 0 0 10px 1px #8ebbff;
@@ -111,7 +119,7 @@
     .multi-select-custom {
         width: 80%;
         padding: none;
-        background-color: #8ebbff 42;
+        background-color: #8ebbff76;
    }
     .selling-portal--selected-data {
         flex-direction: column;

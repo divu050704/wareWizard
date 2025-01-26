@@ -12,7 +12,7 @@
     align-items: center;
 }
 .stock--selected-data-info input {
-    background-color: #8ebbff 42;
+    background-color: #8ebbff76;
     border: none;
     padding: 0.25rem;
     color: #8ebbff;
@@ -36,7 +36,7 @@
     .multi-select-custom {
         width: 100%;
         padding: none;
-        background-color: #8ebbff 42;
+        background-color: #8ebbff76;
         width: 110vw;
    }
     .stock--selected-data {

@@ -1,4 +1,4 @@
-.products-data {
+.product-update {
     padding: 0 0 1rem 1rem;
     position: absolute;
     left: 15%;
@@ -6,24 +6,24 @@
     width: 83.75%;
     height: 85%;
 }
-.products-data h1 {
+.product-update h1 {
     color: #8ebbff;
 }
-.products-data select {
-    background-color: #8ebbff 42;
+.product-update select {
+    background-color: #8ebbff76;
     border: none;
     color: #8ebbff;
     font-size: 1.25rem;
     padding: 0.5rem;
 }
-.products-data select:focus {
+.product-update select:focus {
     outline: 2px solid #8ebbff;
 }
 @media (max-width: 600px) {
-    .products-data h1 {
+    .product-update h1 {
         font-size: 1.5rem;
    }
-    .products-data select {
+    .product-update select {
         font-size: 1rem;
         padding: 0.25rem;
    }
