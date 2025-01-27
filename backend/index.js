@@ -658,7 +658,6 @@ app.post("/api/new-distributor/", (req, res) => {
       .findOne({
         uname: req.cookies.uname,
         SID: req.cookies.SID,
-        admin: true,
       })
       .exec();
     if (verify !== null) {
@@ -689,7 +688,6 @@ app.get("/api/get-distributors/", async (req, res) => {
     .findOne({
       uname: req.cookies.uname,
       SID: req.cookies.SID,
-      admin: true,
     })
     .exec();
   if (verify !== null){
