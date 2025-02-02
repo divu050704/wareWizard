@@ -3,12 +3,10 @@ import logo from "../assets/wareWizard-logo-transparent.png"
 import "../styles/Home.scss"
 import { AnimatePresence, motion } from 'framer-motion'
 
-import NewProduct from "./NewProduct"
 import SellingPortal from "./SellingPortal"
-import PurchasePortal from "./PurchasePortal"
+import PurchasePortal from "./PurchasePortal"   
 import CustomerData from "./CustomerData"
 import ProductsData from "./ProductsData"
-import ProductUpdate from "./productUpdate"
 import Delete from "./Delete"
 import Settings from "./Settings"
 import getCookie from "../custom/getCookie"
@@ -51,10 +49,6 @@ export default function Home() {
                     <FontAwesomeIcon icon={faBars} style={{ color: "#ffffff", padding: "0px 10px 10px 10px", cursor: "pointer" }} onClick={() => setSideBarOpen(prev => !prev)} />
                     <AnimatePresence mode="wait" initial={false}>
                         {sidebarOpen && <div>
-                            <p className={tabOpened === "newProduct" ? "sidebar--selected" : "sidebar--unselected"}
-                                onClick={() => setTabOpened("newProduct")}>
-                                New Product Portal
-                            </p>
                             <p
                                 className={tabOpened === "sellingPortal" ? "sidebar--selected" : "sidebar--unselected"}
                                 onClick={() => setTabOpened("sellingPortal")}>
@@ -76,11 +70,6 @@ export default function Home() {
                                 Products Data
                             </p>
                             <p
-                                className={tabOpened === "productUpdate" ? "sidebar--selected" : "sidebar--unselected"}
-                                onClick={() => setTabOpened("productUpdate")}>
-                                Update Products Data
-                            </p>
-                            <p
                                 className={tabOpened === "Delete" ? "sidebar--selected" : "sidebar--unselected"}
                                 onClick={() => setTabOpened("Delete")}>
                                 Delete Data
@@ -90,12 +79,10 @@ export default function Home() {
                     </AnimatePresence>
                 </div>
 
-                {tabOpened === "newProduct" && <NewProduct />}
                 {tabOpened === "sellingPortal" && <SellingPortal />}
                 {tabOpened === "purchasePortal" && <PurchasePortal />}
                 {tabOpened === "customerData" && <CustomerData />}
                 {tabOpened === "productsData" && <ProductsData />}
-                {tabOpened === "productUpdate" && <ProductUpdate />}
                 {tabOpened === "Delete" && <Delete />}
                 {tabOpened === "settings" && <Settings />}
             </div>
