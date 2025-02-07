@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Multiselect from 'multiselect-react-dropdown';
-import '../styles/purchasePortal.scss';
+import '../styles/purchasePortal.css';
 import NewProduct from './NewProduct';
 import ProductUpdate from './ProductUpdate';
 

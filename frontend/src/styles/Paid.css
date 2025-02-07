@@ -1,0 +1,71 @@
+.paid--table {
+    width: 80vw;
+    display: grid;
+}
+
+.paid--table-row {
+    display: flex;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.paid--table-heading {
+    flex: 1;
+    font-weight: bold;
+    color: #8EBBFF;
+    font-size: 1.5rem;
+    border: 1px solid #8EBBFF;
+    text-align: center;
+    margin: 0;
+}
+
+.paid--table-data-products {
+    flex: 1;
+    margin: 0;
+    color: white;
+    font-size: 1rem;
+    border: 1px solid #8EBBFF;
+    text-align: center;
+}
+
+.paid--table-data {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    margin: 0;
+    color: white;
+    font-size: 1rem;
+    border: 1px solid #8EBBFF;
+    text-align: center;
+}
+
+.paid--table-delete {
+    background-color: rgba(255, 0, 0, 0.735);
+    border: none;
+    color: white;
+    font-size: 1rem;
+    padding: 0.25rem 0.5rem;
+}
+
+.paid--table-delete:focus {
+    outline: orange;
+}
+
+.paid--table-delete:hover {
+    background-color: red;
+    cursor: pointer;
+}
+
+@media (max-width: 600px) {
+    .paid--table-heading {
+        font-size: 1.25rem;
+        padding: 0 1rem;
+    }
+
+    .paid--table-data {
+        font-size: 1rem;
+        padding: 0 1rem;
+    }
+}

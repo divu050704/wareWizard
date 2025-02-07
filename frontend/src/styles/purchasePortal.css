@@ -1,0 +1,145 @@
+.purchase-portal {
+  padding: 0 0 1rem 1rem;
+  position: absolute;
+  left: 15vw;
+  overflow-y: scroll;
+  width: 83.75%;
+  height: 85%;
+  overflow-x: scroll;
+}
+
+.purchase-portal h1, 
+.purchase-portal h2, 
+.purchase-portal h3, 
+.purchase-portal th {
+  color: #8EBBFF;
+}
+
+.purchase-portal td {
+  color: white;
+}
+
+.purchase-portal form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.purchase-portal form input, 
+.purchase-portal form button {
+  background-color: rgba(142, 187, 255, 0.26);
+  border: none;
+  padding: 0.25rem;
+  color: #8EBBFF;
+  width: 50%;
+  border-radius: 0.2rem;
+  font-size: 1.25rem;
+}
+
+.purchase-portal form input:focus, 
+.purchase-portal form button:focus {
+  outline: 1px solid #8EBBFF;
+  box-shadow: 0 0 10px 1px #8EBBFF;
+}
+
+.purchase-portal form select {
+  background-color: rgba(142, 187, 255, 0.26);
+  border: none;
+  padding: 0.25rem;
+  color: #8EBBFF;
+  width: 50%;
+  border-radius: 0.2rem;
+  font-size: 1.25rem;
+}
+
+.purchase-portal form button {
+  background-color: #8EBBFF !important;
+  color: white !important;
+  width: 50.5% !important;
+}
+
+.purchase-portal form button:hover {
+  opacity: 0.9;
+  background-color: #0056b3;
+}
+
+.purchase-portal form button.close-modal {
+  background-color: red;
+}
+
+.purchase-portal form button.close-modal:hover {
+  background-color: darkred;
+}
+
+.purchase-portal table {
+  width: 70%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.purchase-portal table thead tr {
+  background-color: rgba(142, 187, 255, 0.3);
+}
+
+.purchase-portal table thead th {
+  padding: 0.5rem;
+  text-align: left;
+  width: 20%;
+}
+
+.purchase-portal table tbody tr:nth-child(even) {
+  background-color: rgba(142, 187, 255, 0.1);
+}
+
+.purchase-portal table tbody tr td {
+  padding: 0.5rem;
+}
+
+.purchase-portal table tbody tr:hover {
+  background-color: rgba(142, 187, 255, 0.2);
+}
+
+.purchase-portal .responsive-container {
+  overflow-x: auto;
+}
+
+@media (max-width: 600px) {
+  .purchase-portal table {
+      font-size: 0.8rem;
+  }
+}
+
+.purchase-portal .modal {
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.purchase-portal .modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 500px;
+  border-radius: 5px;
+}
+
+.purchase-portal .close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.purchase-portal .close:hover, 
+.purchase-portal .close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}

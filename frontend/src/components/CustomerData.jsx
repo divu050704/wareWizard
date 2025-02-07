@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "../styles/CustomerData.scss";
+import "../styles/CustomerData.css";
 import Due from "./customerData/Due";
 import Advance from "./customerData/Advance";
 import Paid from "./customerData/Paid"; // New component for Paid customers

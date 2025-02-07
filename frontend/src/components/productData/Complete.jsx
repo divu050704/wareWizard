@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import "../../styles/Complete.scss"
+import "../../styles/Complete.css"
 export default function Complete() {
     const [data, setData] = useState([])
     useEffect(() => {

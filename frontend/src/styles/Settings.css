@@ -1,0 +1,46 @@
+:root {
+    --primary-background: #313855;
+    --font-color: #8EBBFF;
+    --input-background: rgba(142, 187, 255, 0.26);
+}
+
+.Settings {
+    padding: 0 0 0 1rem;
+    position: absolute;
+    left: 15%;
+    overflow-y: scroll;
+    width: 83.75%;
+    height: 85%;
+    color: var(--font-color);
+}
+
+.Settings input {
+    background-color: var(--input-background);
+    border: none;
+    padding: 0.25rem;
+    color: var(--font-color);
+    margin: 0.5rem 0 1rem 0;
+}
+
+.Settings input:focus {
+    outline: 1px solid var(--font-color);
+    box-shadow: 0 0 10px 1px var(--font-color);
+}
+
+.Settings input::file-selector-button {
+    background-color: var(--input-background);
+    color: var(--font-color);
+    border: none;
+}
+
+.settings--submit-button {
+    background-color: rgba(142, 187, 255, 0.87) !important;
+    transition: all 0.3s;
+    color: white !important;
+    width: 90%;
+}
+
+.settings--submit-button:hover {
+    background-color: var(--font-color) !important;
+    cursor: pointer;
+}

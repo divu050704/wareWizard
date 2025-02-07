@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import "../../styles/deleteCustomer.scss"
+import "../../styles/deleteCustomer.css"
 export default function Customer() {
     const [data, setData] = useState([])
     useEffect(() => {

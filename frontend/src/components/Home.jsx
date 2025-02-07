@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import logo from "../assets/wareWizard-logo-transparent.png"
-import "../styles/Home.scss"
+import "../styles/Home.css"
 import { AnimatePresence, motion } from 'framer-motion'
 
 import SellingPortal from "./SellingPortal"

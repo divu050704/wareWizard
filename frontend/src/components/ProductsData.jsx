@@ -1,7 +1,7 @@
 import { useState } from "react"
 import Daily from "./productData/Daily"
 import Complete from "./productData/Complete"
-import "../styles/productsData.scss"
+import "../styles/productsData.css"
 export default function ProductsData(){
     const [type, setType] = useState("daily")
     return (

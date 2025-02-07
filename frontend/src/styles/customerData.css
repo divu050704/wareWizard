@@ -1,0 +1,35 @@
+.customerData {
+    padding: 1rem 0 0 1rem;
+    position: absolute;
+    left: 15%;
+    overflow-y: scroll;
+    width: 83.75%;
+    height: 85%;
+}
+
+.customerData h1 {
+    color: #8EBBFF;
+}
+
+.customerData select {
+    background-color: rgba(142, 187, 255, 0.26);
+    border: none;
+    color: #8EBBFF;
+    font-size: 1.25rem;
+    padding: 0.5rem;
+}
+
+.customerData select:focus {
+    outline: 2px solid #8EBBFF;
+}
+
+@media (max-width: 600px) {
+    .customerData h1 {
+        font-size: 1.25rem;
+    }
+
+    .customerData select {
+        font-size: 1rem;
+        padding: 0.25rem;
+    }
+}

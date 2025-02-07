@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import "../../styles/Advance.scss"
+import "../../styles/Advance.css"
 export default function Advance() {
     const [data, setData] = useState([])
     useEffect(() => {

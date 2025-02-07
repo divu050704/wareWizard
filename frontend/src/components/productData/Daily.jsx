@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "../../styles/daily.scss"
+import "../../styles/daily.css"
 export default function Daily() {
     const [data, setData] = useState([])
     const [date, setDate] = useState("")

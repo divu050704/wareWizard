@@ -1,0 +1,63 @@
+:root {
+    --primary-background: #313855;
+    --font-color: #8EBBFF;
+    --input-background: rgba(142, 187, 255, 0.26);
+}
+
+.stock {
+    margin-top: 1rem;
+    width: 80vw;
+}
+
+.stock--selected-data {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.stock--selected-data-info {
+    display: flex;
+    align-items: center;
+}
+
+.stock--selected-data-info input {
+    background-color: var(--input-background);
+    border: none;
+    padding: 0.25rem;
+    color: var(--font-color);
+}
+
+.stock--selected-data-info input:focus {
+    outline: 1px solid var(--font-color);
+    box-shadow: 0 0 10px 1px var(--font-color);
+}
+
+.stock--selected-data-info span {
+    color: var(--font-color);
+}
+
+.stock--submit {
+    background-color: var(--font-color);
+    width: 80vw;
+    color: white;
+    padding: 0.25rem 0;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+@media (max-width: 600px) {
+    .multi-select-custom {
+        width: 110vw;
+        background-color: var(--input-background);
+    }
+
+    .stock--selected-data {
+        flex-direction: column;
+        align-items: start;
+        width: max-content;
+    }
+
+    .stock--selected-data-info input {
+        width: 5rem;
+    }
+}

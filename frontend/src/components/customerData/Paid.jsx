@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "../../styles/Paid.scss";
+import "../../styles/Paid.css";
 
 export default function Paid() {
     const [data, setData] = useState([]);

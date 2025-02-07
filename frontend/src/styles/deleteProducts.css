@@ -1,0 +1,51 @@
+.delete-products h1 {
+    color: #8EBBFF;
+}
+
+.delete-products h2 {
+    color: #8EBBFF;
+}
+
+.delete-products select {
+    background-color: rgba(142, 187, 255, 0.26);
+    border: none;
+    color: #8EBBFF;
+    font-size: 1.25rem;
+    padding: 0.5rem;
+}
+
+.delete-products select:focus {
+    outline: 2px solid #8EBBFF;
+}
+
+.delete-products table {
+    width: 90%;
+    text-align: center;
+    border-color: #8EBBFF;
+    border-collapse: collapse;
+}
+
+.delete-products table th {
+    color: #8EBBFF;
+    font-size: 1.25rem;
+    padding: 0.5rem 0;
+}
+
+.delete-products table td {
+    color: white;
+    padding: 0.5rem 0;
+}
+
+.delete-products table td button {
+    background-color: rgba(255, 0, 0, 0.669);
+    color: white;
+    border: none;
+    font-size: 1rem;
+    padding: 0.2rem 0.4rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.delete-products table td button:hover {
+    background-color: red;
+}

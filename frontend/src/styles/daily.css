@@ -1,39 +1,35 @@
-$primary-background: #313855;
-$font-color: #8EBBFF;
-$input-background: #8ebbff42;
-
-.paid--table {
+.due--table {
     width: 80vw;
     display: grid;
 }
 
-.paid--table-row {
+.due--table-row {
     display: flex;
     width: 100%;
     margin: 0;
     padding: 0;
 }
 
-.paid--table-heading {
+.due--table-heading {
     flex: 1;
     font-weight: bold;
-    color: $font-color;
+    color: #8EBBFF;
     font-size: 1.5rem;
-    border: 1px solid $font-color;
+    border: 1px solid #8EBBFF;
     text-align: center;
     margin: 0;
 }
 
-.paid--table-data-products {
+.due--table-data-products {
     flex: 1;
     margin: 0;
     color: white;
     font-size: 1rem;
-    border: 1px solid $font-color;
+    border: 1px solid #8EBBFF;
     text-align: center;
 }
 
-.paid--table-data {
+.due--table-data {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -41,11 +37,11 @@ $input-background: #8ebbff42;
     margin: 0;
     color: white;
     font-size: 1rem;
-    border: 1px solid $font-color;
+    border: 1px solid #8EBBFF;
     text-align: center;
 }
 
-.paid--table-delete {
+.due--table-delete {
     background-color: rgba(255, 0, 0, 0.735);
     border: none;
     color: white;
@@ -53,22 +49,22 @@ $input-background: #8ebbff42;
     padding: 0.25rem 0.5rem;
 }
 
-.paid--table-delete:focus {
+.due--table-delete:focus {
     outline: orange;
 }
 
-.paid--table-delete:hover {
+.due--table-delete:hover {
     background-color: red;
     cursor: pointer;
 }
 
 @media (max-width: 600px) {
-    .paid--table-heading {
+    .due--table-heading {
         font-size: 1.25rem;
         padding: 0 1rem;
     }
 
-    .paid--table-data {
+    .due--table-data {
         font-size: 1rem;
         padding: 0 1rem;
     }

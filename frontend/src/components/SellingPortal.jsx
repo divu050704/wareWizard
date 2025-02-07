@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import Multiselect from 'multiselect-react-dropdown';
-import "../styles/SellingPortal.scss"
+import "../styles/SellingPortal.css"
 
 export default function SellingPortal() {
 
