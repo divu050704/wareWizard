@@ -1,93 +1,105 @@
-import { useState, useEffect } from "react"
-import "../../styles/deleteCustomer.css"
-import backendInfo from "../../custom/backend-info.json"
+import { useState, useEffect } from "react";
+import backendInfo from "../../custom/backend-info.json";
 
 export default function Customer() {
-    const [data, setData] = useState([])
-    useEffect(() => {
-        fetch(`${backendInfo.url}/api/customer-data`, { credentials: "include" })
-            .then(res => res.json())
-            .then(res => setData(res.data))
-        
-    }, [])
-    const deleteCustomer = (id,name) =>{
-        if (confirm("Are you sure you want to delete " + name)) {
-            const requestOptions = {
-                headers: { "Content-Type": "application/json" },
-                method: "POST",
-                body: JSON.stringify({ id: id, item: name }),
-                credentials: "include"
-            }
-            fetch(`${backendInfo.url}/api/delete-customer/`, requestOptions)
-                .then(res => res.json())
-                .then(res => {
-                    if (res.Deleted) {
-                        alert("Deleted " + res.item)
-                        window.location.reload()
-                    }
-                    else {
-                        alert("An error occured")
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-                    }
-                })
+  useEffect(() => {
+    fetch(`${backendInfo.url}/api/customer-data`, { credentials: "include" })
+      .then((res) => res.json())
+      .then((res) => {
+        setData(res.data);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  }, []);
+
+  const deleteCustomer = (id, name) => {
+    if (!confirm(`Are you sure you want to delete "${name}"?`)) return;
+
+    fetch(`${backendInfo.url}/api/delete-customer/`, {
+      headers: { "Content-Type": "application/json" },
+      method: "POST",
+      body: JSON.stringify({ id, item: name }),
+      credentials: "include",
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.Deleted) {
+          alert(`Deleted "${res.item}"`);
+          setData((prev) => prev.filter((ele) => ele._id !== id)); // Optimized state update
+        } else {
+          alert("An error occurred");
         }
-    }
-    const rows = data.map((ele => {
-        let total = 0;
-        const products = ele.products.map((e, i) => {
-            total += e.sellingQuantity * e.sellingPrice
-            return (
-                <div style={{ display: "flex" }}>
-                    <p className="daily--table-row-c2-c1 daily--table-row-data">
+      });
+  };
 
-                        {e.productName}
-                    </p>
-                    <p className="daily--table-row-c2-others daily--table-row-data" >{e.sellingQuantity}</p>
-                    <p className="daily--table-row-c2-others daily--table-row-data" >{e.sellingPrice}</p>
-                    <p className="daily--table-row-c2-others daily--table-row-data" >{e.sellingQuantity * e.sellingPrice}</p>
+  return (
+    <div className="p-6 bg-white rounded-xl shadow-lg w-full max-w-4xl mx-auto">
+      <h1 className="text-2xl font-semibold text-gray-800 mb-4">🛒 Customers</h1>
 
-                </div>
-            )
-        })
+      {loading ? (
+        <p className="text-gray-600 text-center">Loading...</p>
+      ) : data.length === 0 ? (
+        <p className="text-gray-600 text-center">No customer data available.</p>
+      ) : (
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse border border-gray-300 rounded-lg">
+            <thead>
+              <tr className="bg-gray-100 text-gray-700 text-left">
+                <th className="py-2 px-4 border-b">Name</th>
+                <th className="py-2 px-4 border-b">Products</th>
+                <th className="py-2 px-4 border-b text-center">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.map((ele) => {
+                let total = 0;
 
-
-        
-        return (
-            <div className="delete-customer--table-row">
-                <p className="delete-customer--table-row-c1 delete-customer--table-row-data">{ele.name}</p>
-                <div className="delete-customer--table-row-c2" >
-
-                    <div style={{ display: "flex" }} >
-                        <p className="delete-customer--table-row-c2-c1 delete-customer--table-row-heading">Product Name</p>
-                        <p className="delete-customer--table-row-c2-others delete-customer--table-row-heading">Sold</p>
-                        <p className="delete-customer--table-row-c2-others delete-customer--table-row-heading">Price</p>
-                        <p className="delete-customer--table-row-c2-others delete-customer--table-row-heading">Total</p>
-                    </div>
-                    {products}
-                    <div style={{ display: "flex", justifyContent: "space-evenly", alignItems: "center   " }} >
-                        <p className="delete-customer--table-row-heading" >Total</p>
-                        <p className="delete-customer--table-row-data" >{total}</p>
-                    </div>
-                </div>
-                <div className="delete-customer--table-row-c3" >
-                    <button onClick={() => deleteCustomer(ele._id, ele.name)} >Delete</button>
-                </div>
-            </div>
-        )
-
-    }))
-    return (
-        <div className="delete-customer">
-            <div className="delete-customer--table">
-                <div className="delete-customer--table-row">
-                    <p className="delete-customer--table-row-c1 delete-customer--table-row-heading">Name</p>
-                    <p className="delete-customer--table-row-c2 delete-customer--table-row-heading">Products</p>
-                    <p className="delete-customer--table-row-c3 delete-customer--table-row-heading" >Delete</p>
-                </div>
-                {rows}
-
-            </div>
-            
+                return (
+                  <tr key={ele._id} className="hover:bg-gray-50">
+                    <td className="py-2 px-4 border-b font-medium">{ele.name}</td>
+                    <td className="py-2 px-4 border-b">
+                      <div className="bg-gray-100 p-2 rounded-lg">
+                        <div className="grid grid-cols-4 font-semibold text-gray-600 border-b pb-2">
+                          <span>Product</span>
+                          <span>Sold</span>
+                          <span>Price</span>
+                          <span>Total</span>
+                        </div>
+                        {ele.products.map((product, i) => {
+                          total += product.sellingQuantity * product.sellingPrice;
+                          return (
+                            <div key={i} className="grid grid-cols-4 py-1 border-b">
+                              <span>{product.productName}</span>
+                              <span>{product.sellingQuantity}</span>
+                              <span>₹{product.sellingPrice}</span>
+                              <span className="font-medium">₹{product.sellingQuantity * product.sellingPrice}</span>
+                            </div>
+                          );
+                        })}
+                        <div className="flex justify-between font-semibold text-gray-700 mt-2">
+                          <span>Total:</span>
+                          <span>₹{total}</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td className="py-2 px-4 border-b text-center">
+                      <button
+                        onClick={() => deleteCustomer(ele._id, ele.name)}
+                        className="bg-red-500 hover:bg-red-600 text-white px-4 py-1 rounded-lg text-sm transition"
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
         </div>
-    )
+      )}
+    </div>
+  );
 }

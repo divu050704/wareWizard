@@ -63,10 +63,6 @@ const dataSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  seller: {
-    type: String,
-    required: true,
-  },
   gst: {
     type: Number,
     required: true,
@@ -149,12 +145,32 @@ const sellerSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  address: {
+    type: String,
+    required: true,
+  }
 });
+
+const purchasedSchema = mongoose.Schema({
+  seller: {
+    type: String,
+    required: true
+  },
+  products: {
+    type: Array,
+    required: true
+  },
+  invoiceNumber: {
+    type: String, 
+    required: true
+  }
+})
 
 const userModel = mongoose.model("users", userSchema);
 const dataModel = mongoose.model("data", dataSchema);
 const customerModel = mongoose.model("customer", customerSchema);
 const sellerModel = mongoose.model("seller", sellerSchema);
+const purchaseModel = mongoose.model("purchased", purchasedSchema)
 
 app.post("/api/login", (req, res) => {
   async function setSID(id) {
@@ -259,7 +275,6 @@ app.post("/api/new-product", (req, res) => {
         category: req.body.category,
         subCategory: req.body.subCategory,
         gst: ele.gst,
-        seller: ele.seller,
       };
       const save = dataModel(eachData);
       save.save();
@@ -663,6 +678,8 @@ app.post("/api/new-distributor/", (req, res) => {
     if (verify !== null) {
       const name = req.body.name;
       const phoneNumber = req.body.phoneNumber;
+      const address = req.body.address;
+
       const distributorExistence = await sellerModel
         .findOne({ phoneNumber: phoneNumber })
         .exec();
@@ -670,6 +687,7 @@ app.post("/api/new-distributor/", (req, res) => {
         const data = new sellerModel({
           name: name,
           phoneNumber: phoneNumber,
+          address: address
         });
         data.save();
         res.status(200).send({ added: true });

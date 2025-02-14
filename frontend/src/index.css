@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
- body {
+/* styles/index.css */
+@import 'tailwindcss'
+ /* body {
 	 margin: 0;
 	 font-family: 'Roboto', sans-serif;
 	 background-color: #23293d;
 	 overflow-y: hidden;
-}
- 
+} */

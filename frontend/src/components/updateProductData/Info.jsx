@@ -1,104 +1,86 @@
 import Multiselect from "multiselect-react-dropdown";
 import { useEffect, useState } from "react";
-import "../../styles/info.css"
-import backendInfo from "../../custom/backend-info.json"
+import backendInfo from "../../custom/backend-info.json";
 
 export default function Info() {
-    const [data, setData] = useState([])
-    const [selected, setSelected] = useState([])
-    useEffect(() => {
-        fetch(`${backendInfo.url}/api/products-data`, { credentials: "include" })
-            .then(res => res.json())
-            .then(res => setData(res.data))
-    }, [])
-    const selectedData = selected.map((ele) => {
-        return (
-            <div className="info--selected-data">
-                <p>Name:</p>
-                <input type="text" value={ele.productName} onChange={(event) => setSelected((prev) => {
-                    const newData = []
-                    prev.map((e, i) => {
+  const [data, setData] = useState([]);
+  const [selected, setSelected] = useState([]);
 
-                        if (e._id === ele._id) {
-                            newData.push({ ...e, productName: (event.target.value) })
-                        }
-                        else {
-                            newData.push(e)
-                        }
+  useEffect(() => {
+    fetch(`${backendInfo.url}/api/products-data`, { credentials: "include" })
+      .then((res) => res.json())
+      .then((res) => setData(res.data));
+  }, []);
 
-                    })
+  const handleInputChange = (id, field, value) => {
+    setSelected((prev) =>
+      prev.map((item) =>
+        item._id === id ? { ...item, [field]: value } : item
+      )
+    );
+  };
 
-                    return newData
-                })} />
-                <p>Selling Price</p>
-                <input type="text" value={ele.sellingPrice} onChange={(event) => setSelected((prev) => {
-                    const newData = []
-                    prev.map((e, i) => {
+  const selectedData = selected.map((ele) => (
+    <div key={ele._id} className="p-4 bg-gray-100 rounded-lg shadow-md mb-4">
+      <label className="block text-gray-700 font-semibold mb-1">Name:</label>
+      <input
+        type="text"
+        value={ele.productName}
+        onChange={(event) => handleInputChange(ele._id, "productName", event.target.value)}
+        className="w-full p-2 border border-gray-300 rounded-lg mb-2"
+      />
+      <label className="block text-gray-700 font-semibold mb-1">Selling Price:</label>
+      <input
+        type="text"
+        value={ele.sellingPrice}
+        onChange={(event) => handleInputChange(ele._id, "sellingPrice", event.target.value)}
+        className="w-full p-2 border border-gray-300 rounded-lg mb-2"
+      />
+      <label className="block text-gray-700 font-semibold mb-1">Cost Price:</label>
+      <input
+        type="text"
+        value={ele.costPrice}
+        onChange={(event) => handleInputChange(ele._id, "costPrice", event.target.value)}
+        className="w-full p-2 border border-gray-300 rounded-lg mb-2"
+      />
+    </div>
+  ));
 
-                        if (e._id === ele._id) {
-                            newData.push({ ...e, sellingPrice: (event.target.value) })
-                        }
-                        else {
-                            newData.push(e)
-                        }
-
-                    })
-
-                    return newData
-                })} />
-                <p>Cost Price</p>
-                <input value={ele.costPrice} onChange={(event) => setSelected((prev) => {
-                    const newData = []
-                    prev.map((e, i) => {
-
-                        if (e._id === ele._id) {
-                            newData.push({ ...e, costPrice: (event.target.value) })
-                        }
-                        else {
-                            newData.push(e)
-                        }
-
-                    })
-
-                    return newData
-                })} />
-                <hr />
-            </div>
-        )
+  const submit = () => {
+    fetch(`${backendInfo.url}/api/update-info/`, {
+      headers: { "Content-Type": "application/json" },
+      method: "POST",
+      body: JSON.stringify({ data: selected }),
+      credentials: "include",
     })
-    const submit = () => {
-        
-        const requestOptions = {
-            headers: { "Content-Type": "application/json" },
-            method: "POST",
-            body: JSON.stringify({ data: selected }),
-            credentials: "include"
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.Updated) {
+          alert("Updated");
+          window.location.reload();
         }
-        fetch(`${backendInfo.url}/api/update-info/`, requestOptions)
-            .then(res => res.json())
-            .then(res => {
-                if (res.Updated){
-                    alert("Updated")
-                    window.location.reload()
-                }
-            })
-    }
-    return (
-        <div className="info">
-            <div className="multi-select-custom">
-                <Multiselect
-                    options={data}
-                    onSelect={(value, final) => setSelected((prev) => [...prev, { ...final}])}
-                    onRemove={(value) => {
-                        setSelected(prev => prev.length === 0 ? [] : value)
-                    }}
-                    displayValue="productName"
-                    groupBy="category"
-                    style={{ chips: { background: "rgba(142, 187, 255, 0.26)" }, multiselectContainer: { background: "rgba(142, 187, 255, 0.26)" } }}
-                />
-            </div>
-            {selectedData}
-            <button className="info--submit" onClick={submit} >Submit</button>
-        </div>
-    )
+      });
+  };
+
+  return (
+    <div className="info p-6 bg-white rounded-lg shadow-lg max-w-2xl mx-auto">
+      <h1 className="text-xl font-bold text-gray-800 mb-4 text-center">🛒 Manage Product Info</h1>
+      <div className="multi-select-custom mb-4">
+        <Multiselect
+          options={data}
+          onSelect={(value, final) => setSelected([...selected, final])}
+          onRemove={(value) => setSelected(value)}
+          displayValue="productName"
+          groupBy="category"
+        />
+      </div>
+      {selectedData}
+      <button
+        className="w-full p-3 bg-blue-500 text-white font-bold rounded-lg shadow-md hover:bg-blue-600 transition"
+        onClick={submit}
+      >
+        Submit
+      </button>
+    </div>
+  );
 }

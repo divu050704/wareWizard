@@ -1,6 +1,5 @@
 import { useState } from "react"
 import sha256 from "../custom/sha256"
-import "../styles/Settings.css"
 import backendInfo from "../custom/backend-info.json"
 
 export default function Settings() {

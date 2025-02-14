@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react"
-import "../../styles/Advance.css"
 import backendInfo from "../../custom/backend-info.json"
 
 export default function Advance() {
@@ -33,36 +32,63 @@ export default function Advance() {
         if ((ele.paymentMethod === "Advanced-Online") || (ele.paymentMethod === "Advance-Offline") || (ele.paid > ele.total)) {
             var date = new Date(ele.createdAt)
             const products = ele.products.map((e, i) => (
-                <p style={{ borderBottom: "1px solid #8EBBFF", margin: 0 }}>{e.productName}</p>
+                <div key={i} className="py-1 border-b border-blue-200 last:border-b-0">
+                    {e.productName}
+                </div>
             ))
             return (
-                <div className="advance--table-row">
-                    <p className="advance--table-data">{ele.name}</p>
-                    <p className="advance--table-data">{ele.phoneNumber}</p>
-                    <p className="advance--table-data">{date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()}</p>
-                    <div className="advance--table-data-products">{products}</div>
-                    <p className="advance--table-data">{ele.total}</p>
-                    <p className="advance--table-data">{ele.paid}</p>
-
-                    <div className="advance--table-data"><button onClick={() => deleteAdvcance(ele._id)} className="advance--table-delete" >Delete</button></div>
+                <div key={ind} className="grid grid-cols-7 gap-4 items-center p-4 border-b border-gray-200 hover:bg-gray-50">
+                    <div className="truncate">{ele.name}</div>
+                    <div className="truncate">{ele.phoneNumber}</div>
+                    <div className="truncate">
+                        {date.getFullYear()}-{date.getMonth() + 1}-{date.getDate()}
+                    </div>
+                    <div className="max-h-32 overflow-y-auto">
+                        {products}
+                    </div>
+                    <div className="truncate">{ele.total}</div>
+                    <div className="truncate">{ele.paid}</div>
+                    <div>
+                        <button 
+                            onClick={() => deleteAdvcance(ele._id)}
+                            className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50"
+                        >
+                            Delete
+                        </button>
+                    </div>
                 </div>
             )
         }
+        return null;
     })
+
     return (
-        <div className="Advance">
-            <h1>Advance</h1>
-            <div className="advance--table">
-                <div className="advance--table-row">
-                    <p className="advance--table-heading">Name</p>
-                    <p className="advance--table-heading">Phone Number</p>
-                    <p className="advance--table-heading">Date</p>
-                    <p className="advance--table-heading">Products</p>
-                    <p className="advance--table-heading">Total</p>
-                    <p className="advance--table-heading">Paid</p>
-                    <p className="advance--table-heading">Delete</p>
+        <div className="max-w-7xl mx-auto p-6">
+            <h1 className="text-2xl font-bold mb-6">Advance</h1>
+            
+            <div className="bg-white rounded-lg shadow overflow-hidden">
+                {/* Table Header */}
+                <div className="grid grid-cols-7 gap-4 items-center p-4 bg-gray-50 border-b border-gray-200 font-semibold">
+                    <div>Name</div>
+                    <div>Phone Number</div>
+                    <div>Date</div>
+                    <div>Products</div>
+                    <div>Total</div>
+                    <div>Paid</div>
+                    <div>Delete</div>
                 </div>
-                {table}
+
+                {/* Table Body */}
+                <div className="divide-y divide-gray-200">
+                    {table}
+                </div>
+
+                {/* Empty State */}
+                {data.length === 0 && (
+                    <div className="p-8 text-center text-gray-500">
+                        No advance payments found
+                    </div>
+                )}
             </div>
         </div>
     )
