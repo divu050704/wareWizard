@@ -148,29 +148,29 @@ const sellerSchema = mongoose.Schema({
   address: {
     type: String,
     required: true,
-  }
+  },
 });
 
 const purchasedSchema = mongoose.Schema({
   seller: {
     type: String,
-    required: true
+    required: true,
   },
   products: {
     type: Array,
-    required: true
+    required: true,
   },
   invoiceNumber: {
-    type: String, 
-    required: true
-  }
-})
+    type: String,
+    required: true,
+  },
+});
 
 const userModel = mongoose.model("users", userSchema);
 const dataModel = mongoose.model("data", dataSchema);
 const customerModel = mongoose.model("customer", customerSchema);
 const sellerModel = mongoose.model("seller", sellerSchema);
-const purchaseModel = mongoose.model("purchased", purchasedSchema)
+const purchaseModel = mongoose.model("purchased", purchasedSchema);
 
 app.post("/api/login", (req, res) => {
   async function setSID(id) {
@@ -228,21 +228,18 @@ app.post("/api/login", (req, res) => {
   check();
 });
 
-app.get("/api/verify", (req, res) => {
-  async function check() {
-    const query = await userModel
-      .findOne({
-        uname: req.cookies.uname,
-        SID: req.cookies.SID,
-      })
-      .exec();
-    if (query !== null) {
-      res.send({ Verified: true });
-    } else {
-      res.send({ Verified: false });
-    }
+app.get("/api/verify", async (req, res) => {
+  const query = await userModel
+    .findOne({
+      uname: req.cookies.uname,
+      SID: req.cookies.SID,
+    })
+    .exec();
+  if (query !== null) {
+    res.send({ Verified: true });
+  } else {
+    res.send({ Verified: false });
   }
-  check();
 });
 
 app.post("/api/new-product", (req, res) => {
@@ -517,6 +514,29 @@ app.post("/api/update-stock/", (req, res) => {
   checkAndReturn();
 });
 
+app.post("/api/add-purchase/", async (req, res) => {
+  const verify = await userModel
+    .findOne({
+      uname: req.cookies.uname,
+      SID: req.cookies.SID,
+    })
+    .exec();
+  if (verify !== null) {
+    const products = req.body.data;
+    const seller = req.body.seller;
+    const invoiceNumber = req.body.invoiceNumber;
+
+    await purchaseModel({
+      seller: seller,
+      invoiceNumber: invoiceNumber,
+      products: products,
+    }).save();
+    res.status(200).send({ Updated: true });
+  } else {
+    res.status(302).send({ Updated: false, message: "Unauthorized Access" });
+  }
+});
+
 app.post("/api/update-info/", (req, res) => {
   async function checkAndReturn() {
     const verify = await userModel
@@ -537,6 +557,7 @@ app.post("/api/update-info/", (req, res) => {
                 productName: ele.productName,
                 sellingPrice: ele.sellingPrice,
                 costPrice: ele.costPrice,
+                gst: ele.gst,
               },
             }
           )
@@ -687,7 +708,7 @@ app.post("/api/new-distributor/", (req, res) => {
         const data = new sellerModel({
           name: name,
           phoneNumber: phoneNumber,
-          address: address
+          address: address,
         });
         data.save();
         res.status(200).send({ added: true });
@@ -708,11 +729,10 @@ app.get("/api/get-distributors/", async (req, res) => {
       SID: req.cookies.SID,
     })
     .exec();
-  if (verify !== null){
-    const data = await sellerModel.find({})
-    res.status(200).send({data: data})
-  }
-  else{
+  if (verify !== null) {
+    const data = await sellerModel.find({});
+    res.status(200).send({ data: data });
+  } else {
     res.status(302).send({ status: "Unauthorized Access" });
   }
 });

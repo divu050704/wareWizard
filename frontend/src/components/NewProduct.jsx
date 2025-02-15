@@ -4,7 +4,7 @@ import backendInfo from "../custom/backend-info.json";
 export default function NewProduct() {
   const [category, setCategory] = useState("Book");
   const [subCategory, setSubCategory] = useState("10-years");
-  const [selectedSeller, setSelectedSeller] = useState("")
+  const [selectedSeller, setSelectedSeller] = useState("");
   const [data, setData] = useState([
     {
       productName: "",
@@ -14,7 +14,6 @@ export default function NewProduct() {
       gst: "",
     },
   ]);
-  
 
   const submit = () => {
     if (
@@ -33,7 +32,7 @@ export default function NewProduct() {
           data: data,
           category: category,
           subCategory: subCategory,
-          seller: selectedSeller
+          seller: selectedSeller,
         }),
         credentials: "include",
       };
@@ -93,7 +92,7 @@ export default function NewProduct() {
       <div className="flex items-center gap-2 mb-4">
         <h2 className="font-bold text-lg text-gray-700">{index + 1}.</h2>
       </div>
-      
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -102,7 +101,9 @@ export default function NewProduct() {
           <input
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             value={ele.productName}
-            onChange={(event) => handleDataChange(event.target.value, "productName", index)}
+            onChange={(event) =>
+              handleDataChange(event.target.value, "productName", index)
+            }
           />
         </div>
 
@@ -113,7 +114,9 @@ export default function NewProduct() {
           <input
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             value={ele.costPrice}
-            onChange={(event) => handleDataChange(event.target.value, "costPrice", index)}
+            onChange={(event) =>
+              handleDataChange(event.target.value, "costPrice", index)
+            }
           />
         </div>
 
@@ -124,7 +127,9 @@ export default function NewProduct() {
           <input
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             value={ele.sellingPrice}
-            onChange={(event) => handleDataChange(event.target.value, "sellingPrice", index)}
+            onChange={(event) =>
+              handleDataChange(event.target.value, "sellingPrice", index)
+            }
           />
         </div>
 
@@ -135,7 +140,9 @@ export default function NewProduct() {
           <input
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             value={ele.quantity}
-            onChange={(event) => handleDataChange(event.target.value, "quantity", index)}
+            onChange={(event) =>
+              handleDataChange(event.target.value, "quantity", index)
+            }
           />
         </div>
 
@@ -143,16 +150,24 @@ export default function NewProduct() {
           <label className="block text-sm font-medium text-gray-700 mb-1">
             GST
           </label>
-          <input
+          <select
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             value={ele.gst}
-            onChange={(event) => handleDataChange(event.target.value, "gst", index)}
+            onChange={(event) =>
+              handleDataChange(event.target.value, "gst", index)
+            }
             type="number"
-          />
+          >
+            <option value={0}>0%</option>
+            <option value={5}>5%</option>
+            <option value={12}>12%</option>
+            <option value={18}>18%</option>
+            <option value={28}>28%</option>
+          </select>
         </div>
       </div>
 
-      <button 
+      <button
         onClick={() => delData(index)}
         className="mt-4 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 transition-colors"
       >
@@ -200,14 +215,14 @@ export default function NewProduct() {
       {main}
 
       <div className="flex gap-4">
-        <button 
+        <button
           onClick={addNew}
           className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 transition-colors"
         >
           Add+
         </button>
 
-        <button 
+        <button
           onClick={submit}
           className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors"
         >

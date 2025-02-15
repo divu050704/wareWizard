@@ -8,7 +8,7 @@ export default function NewDistributor() {
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = () => {
-    if (!name || !phoneNumber) {
+    if (!name || !phoneNumber || !address) {
       alert("Please fill in all required fields!");
       return;
     }
@@ -69,7 +69,7 @@ export default function NewDistributor() {
       </div>
 
       <div className="mb-4">
-        <label className="block text-gray-700 font-medium">Address (Optional)</label>
+        <label className="block text-gray-700 font-medium">Address</label>
         <input
           type="text"
           value={address}

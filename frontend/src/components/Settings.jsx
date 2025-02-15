@@ -1,89 +1,190 @@
-import { useState } from "react"
-import sha256 from "../custom/sha256"
-import backendInfo from "../custom/backend-info.json"
+import { useState } from "react";
+import sha256 from "../custom/sha256";
+import backendInfo from "../custom/backend-info.json";
 
 export default function Settings() {
-    const [creds, setCreds] = useState({ currentPassword: '', newPassword: "", confirmNewPassword: "" })
-    const [newUser, setNewUser] = useState({ user: '', passwd: "", confirmPasswd: "", admin: false })
-    const changePasswords = (e) => {
-        e.preventDefault()
-        if (creds.newPassword === creds.confirmNewPassword) {
-            const requestOptions = {
-                headers: { "Content-Type": "application/json" },
-                method: "POST",
-                body: JSON.stringify({ passwd: sha256(creds.currentPassword), newPasswd: sha256(creds.newPassword) }),
-                credentials: "include"
-            }
-            fetch(`${backendInfo.url}/api/change-password`, requestOptions)
-                .then(res => res.json())
-                .then(res => {
-                    if (res.Updated) {
-                        alert("Password Changed, you will be logged out now!")
-                        fetch(`${backendInfo.url}/api/logout/`, { credentials: "include" })
-                        window.location.reload()
-                    }
-                    else {
-                        alert("An error occured")
-                    }
-                })
-        }
-        else {
-            alert("Passwords don't match")
-        }
+  const [creds, setCreds] = useState({
+    currentPassword: "",
+    newPassword: "",
+    confirmNewPassword: "",
+  });
+  const [newUser, setNewUser] = useState({
+    user: "",
+    passwd: "",
+    confirmPasswd: "",
+    admin: false,
+  });
+
+  const handlePasswordChange = (e) => {
+    e.preventDefault();
+    if (!creds.currentPassword || !creds.newPassword || !creds.confirmNewPassword) {
+      alert("Please fill out all fields.");
+      return;
     }
-    const addUser = (e) => {
-        e.preventDefault()
-
-        if (newUser.confirmPasswd === newUser.passwd) {
-            const requestOptions = {
-                headers: { "Content-Type": "application/json" },
-                method: "POST",
-                body: JSON.stringify({ passwd: sha256(newUser.passwd.trim()), user: newUser.user.trim(), admin: newUser.admin }),
-                credentials: "include"
-            }
-            fetch(`${backendInfo.url}/api/new-user`, requestOptions)
-                .then(res => res.json())
-                .then(res => {
-                    if (res.added) {
-                        alert("New user added")
-                        window.location.reload()
-                    }
-                    else {
-                        alert("An error occured")
-                    }
-                })
-        }
-        else {
-            alert("Passwords don't match")
-        }
+    if (creds.newPassword !== creds.confirmNewPassword) {
+      alert("Passwords do not match.");
+      return;
     }
-    return (
-        <div className="Settings" >
-            <h1 >Settings</h1>
-            <h2>Change Password</h2>
-            <form onSubmit={changePasswords}>
-                <label htmlFor="currentPassword">Current Password</label><br />
-                <input type="text" id="currentPassword" value={creds.currentPassword} onChange={(event) => setCreds((prev) => ({ ...prev, currentPassword: event.target.value }))} required={true} /><br />
-                <label htmlFor="newPassword">New Password</label><br />
-                <input type="text" id="newPassword" value={creds.newPassword} onChange={(event) => setCreds((prev) => ({ ...prev, newPassword: event.target.value }))} required={true} /><br />
-                <label htmlFor="confirmNewPassword">Confirm New Password</label><br />
-                <input type="text" id="confirmNewPassword" value={creds.confirmNewPassword} onChange={(event) => setCreds((prev) => ({ ...prev, confirmNewPassword: event.target.value }))} required={true} /><br />
 
-                <input type="submit" className="settings--submit-button" />
-            </form>
-            <h2>Add new User</h2>
-            <form onSubmit={addUser}>
-                <label htmlFor="username" >Username</label><br />
-                <input type="text" id="username" value={newUser.user} onChange={(event) => setNewUser((prev) => ({ ...prev, user: event.target.value }))} required={true} /><br />
-                <input type="checkbox" id="accessLevel" value={newUser.admin} onChange={(event) => setNewUser((prev) => ({ ...prev, admin: event.target.checked }))} />&emsp;
-                <label htmlFor="accessLevel" >Admin</label><br />
+    fetch(`${backendInfo.url}/api/change-password`, {
+      headers: { "Content-Type": "application/json" },
+      method: "POST",
+      body: JSON.stringify({
+        passwd: sha256(creds.currentPassword),
+        newPasswd: sha256(creds.newPassword),
+      }),
+      credentials: "include",
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.Updated) {
+          alert("Password changed! You will be logged out.");
+          fetch(`${backendInfo.url}/api/logout/`, { credentials: "include" });
+          window.location.reload();
+        } else {
+          alert("An error occurred.");
+        }
+      });
+  };
 
-                <label htmlFor="passwd" >Password</label><br />
-                <input type="text" id="passwd" value={newUser.passwd} onChange={(event) => setNewUser((prev) => ({ ...prev, passwd: event.target.value }))} required={true} /><br />
-                <label htmlFor="confirmPasswd">Confirm Password</label><br />
-                <input type="text" id="confirmPasswd" value={newUser.confirmPasswd} onChange={(event) => setNewUser((prev) => ({ ...prev, confirmPasswd: event.target.value }))} required={true} /><br />
-                <input type="submit" className="settings--submit-button" />
-            </form>
+  const handleAddUser = (e) => {
+    e.preventDefault();
+    if (!newUser.user || !newUser.passwd || !newUser.confirmPasswd) {
+      alert("Please fill out all fields.");
+      return;
+    }
+    if (newUser.passwd !== newUser.confirmPasswd) {
+      alert("Passwords do not match.");
+      return;
+    }
+
+    fetch(`${backendInfo.url}/api/new-user`, {
+      headers: { "Content-Type": "application/json" },
+      method: "POST",
+      body: JSON.stringify({
+        user: newUser.user.trim(),
+        passwd: sha256(newUser.passwd.trim()),
+        admin: newUser.admin,
+      }),
+      credentials: "include",
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.added) {
+          alert("New user added successfully!");
+          setNewUser({ user: "", passwd: "", confirmPasswd: "", admin: false });
+        } else {
+          alert("An error occurred.");
+        }
+      });
+  };
+
+  return (
+    <div className="max-w-lg mx-auto p-6 bg-white shadow-lg rounded-lg">
+      <h1 className="text-2xl font-semibold mb-4">⚙️ Settings</h1>
+
+      {/* Change Password Section */}
+      <h2 className="text-lg font-medium mb-2">🔑 Change Password</h2>
+      <form onSubmit={handlePasswordChange} className="mb-6">
+        <label className="block mb-1">Current Password</label>
+        <input
+          type="password"
+          value={creds.currentPassword}
+          onChange={(e) =>
+            setCreds((prev) => ({ ...prev, currentPassword: e.target.value }))
+          }
+          className="w-full p-2 border rounded-lg mb-2"
+          required
+        />
+
+        <label className="block mb-1">New Password</label>
+        <input
+          type="password"
+          value={creds.newPassword}
+          onChange={(e) =>
+            setCreds((prev) => ({ ...prev, newPassword: e.target.value }))
+          }
+          className="w-full p-2 border rounded-lg mb-2"
+          required
+        />
+
+        <label className="block mb-1">Confirm New Password</label>
+        <input
+          type="password"
+          value={creds.confirmNewPassword}
+          onChange={(e) =>
+            setCreds((prev) => ({
+              ...prev,
+              confirmNewPassword: e.target.value,
+            }))
+          }
+          className="w-full p-2 border rounded-lg mb-2"
+          required
+        />
+
+        <button
+          type="submit"
+          className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg mt-3 transition"
+        >
+          Update Password ✅
+        </button>
+      </form>
+
+      {/* Add User Section */}
+      <h2 className="text-lg font-medium mb-2">👤 Add New User</h2>
+      <form onSubmit={handleAddUser}>
+        <label className="block mb-1">Username</label>
+        <input
+          type="text"
+          value={newUser.user}
+          onChange={(e) =>
+            setNewUser((prev) => ({ ...prev, user: e.target.value }))
+          }
+          className="w-full p-2 border rounded-lg mb-2"
+          required
+        />
+
+        <div className="flex items-center mb-2">
+          <input
+            type="checkbox"
+            checked={newUser.admin}
+            onChange={(e) =>
+              setNewUser((prev) => ({ ...prev, admin: e.target.checked }))
+            }
+            className="mr-2"
+          />
+          <label>Admin</label>
         </div>
-    )
+
+        <label className="block mb-1">Password</label>
+        <input
+          type="password"
+          value={newUser.passwd}
+          onChange={(e) =>
+            setNewUser((prev) => ({ ...prev, passwd: e.target.value }))
+          }
+          className="w-full p-2 border rounded-lg mb-2"
+          required
+        />
+
+        <label className="block mb-1">Confirm Password</label>
+        <input
+          type="password"
+          value={newUser.confirmPasswd}
+          onChange={(e) =>
+            setNewUser((prev) => ({ ...prev, confirmPasswd: e.target.value }))
+          }
+          className="w-full p-2 border rounded-lg mb-2"
+          required
+        />
+
+        <button
+          type="submit"
+          className="w-full bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg mt-3 transition"
+        >
+          Add User ➕
+        </button>
+      </form>
+    </div>
+  );
 }

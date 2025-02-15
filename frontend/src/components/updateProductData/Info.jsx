@@ -9,14 +9,12 @@ export default function Info() {
   useEffect(() => {
     fetch(`${backendInfo.url}/api/products-data`, { credentials: "include" })
       .then((res) => res.json())
-      .then((res) => setData(res.data));
+      .then((res) => {console.log(res.data);setData(res.data)});
   }, []);
 
   const handleInputChange = (id, field, value) => {
     setSelected((prev) =>
-      prev.map((item) =>
-        item._id === id ? { ...item, [field]: value } : item
-      )
+      prev.map((item) => (item._id === id ? { ...item, [field]: value } : item))
     );
   };
 
@@ -26,23 +24,47 @@ export default function Info() {
       <input
         type="text"
         value={ele.productName}
-        onChange={(event) => handleInputChange(ele._id, "productName", event.target.value)}
+        onChange={(event) =>
+          handleInputChange(ele._id, "productName", event.target.value)
+        }
         className="w-full p-2 border border-gray-300 rounded-lg mb-2"
       />
-      <label className="block text-gray-700 font-semibold mb-1">Selling Price:</label>
+      <label className="block text-gray-700 font-semibold mb-1">
+        Selling Price:
+      </label>
       <input
         type="text"
         value={ele.sellingPrice}
-        onChange={(event) => handleInputChange(ele._id, "sellingPrice", event.target.value)}
+        onChange={(event) =>
+          handleInputChange(ele._id, "sellingPrice", event.target.value)
+        }
         className="w-full p-2 border border-gray-300 rounded-lg mb-2"
       />
-      <label className="block text-gray-700 font-semibold mb-1">Cost Price:</label>
+      <label className="block text-gray-700 font-semibold mb-1">
+        Cost Price:
+      </label>
       <input
         type="text"
         value={ele.costPrice}
-        onChange={(event) => handleInputChange(ele._id, "costPrice", event.target.value)}
+        onChange={(event) =>
+          handleInputChange(ele._id, "costPrice", event.target.value)
+        }
         className="w-full p-2 border border-gray-300 rounded-lg mb-2"
       />
+      <label className="block text-gray-700 font-semibold mb-1">GST%:</label>
+      <select
+        value={ele.gst}
+        onChange={(event) =>
+          handleInputChange(ele._id, "gst", event.target.value)
+        }
+        className="w-full p-2 border border-gray-300 rounded-lg mb-2"
+      >
+        <option value={0} >0%</option>
+        <option value={5} >5%</option>
+        <option value={12}>12%</option>
+        <option value={18}>18%</option>
+        <option value={28}>28%</option>
+      </select>
     </div>
   ));
 
@@ -64,7 +86,9 @@ export default function Info() {
 
   return (
     <div className="info p-6 bg-white rounded-lg shadow-lg max-w-2xl mx-auto">
-      <h1 className="text-xl font-bold text-gray-800 mb-4 text-center">🛒 Manage Product Info</h1>
+      <h1 className="text-xl font-bold text-gray-800 mb-4 text-center">
+        🛒 Manage Product Info
+      </h1>
       <div className="multi-select-custom mb-4">
         <Multiselect
           options={data}
