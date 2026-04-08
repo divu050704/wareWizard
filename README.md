@@ -1,5 +1,5 @@
 # wareWizard
-Inventory management tool currently being used by BookWithUVA, ANDC
+Inventory management tool currently being used by BookWithUVA
 
 ## Key Features
 1. Keep a track of your stock and customers.
